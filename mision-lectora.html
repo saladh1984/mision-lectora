@@ -1,0 +1,2322 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Misión Lectora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Baloo+2:wght@500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#EDF1F7; --surface:#FFFFFF; --surface-2:#F5F7FB; --ink:#16203A; --ink-2:#4B5673; --ink-3:#7A849C; --line:#D8DFEB;
+  --brand:#1E3A8A; --brand-ink:#FFFFFF; --sun:#F4B400; --sun-bg:#FFF4CC; --sun-ink:#5A4200;
+  --loc:#2563EB; --loc-bg:#E2EBFF; --inf:#8338D6; --inf-bg:#F0E5FC; --ref:#D4560B; --ref-bg:#FFEADB; --sin:#0A8659; --sin-bg:#DAF4E8;
+  --ok:#157A3A; --ok-bg:#DDF7E6; --bad:#BE2A20; --bad-bg:#FDE4E1;
+  --pista:#FFE27A; --pista-ink:#16203A;
+  --r:#0E7490; --i:#C2410C; --c:#15803D; --e:#7E22CE;
+  --k-dato:#2563EB; --k-causa:#0E7490; --k-contraste:#D12D2D; --k-opinion:#D4560B; --k-otraop:#9A6A00; --k-argumento:#BE185D; --k-idea:#C99700; --k-inferencia:#7C3AED; --k-vocab:#DB2777; --k-grafico:#0F766E;
+  --bar:#8DA6D8; --bar-hl:#F4B400;
+  --shadow:0 1px 2px rgba(22,32,58,.06), 0 6px 18px rgba(22,32,58,.07);
+  --radius:16px;
+  --f-display:"Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1424; --surface:#172036; --surface-2:#1E2842; --ink:#E9EEF8; --ink-2:#AEB8CF; --ink-3:#7F8AA5; --line:#2B3754;
+    --brand:#8FA8FF; --brand-ink:#0E1424; --sun:#FFC933; --sun-bg:#3A300F; --sun-ink:#FFE08A;
+    --loc:#7EA4FF; --loc-bg:#1C2B52; --inf:#C29BFF; --inf-bg:#2E2150; --ref:#FF9A5A; --ref-bg:#43261A; --sin:#4FD6A1; --sin-bg:#123A2D;
+    --ok:#5BD98A; --ok-bg:#133A25; --bad:#FF8A80; --bad-bg:#472020;
+    --pista:#FFD84D; --pista-ink:#16203A;
+    --r:#4FC3DC; --i:#FF9A5A; --c:#5BD98A; --e:#C29BFF;
+    --k-dato:#7EA4FF; --k-causa:#4FC3DC; --k-contraste:#FF7B7B; --k-opinion:#FF9A5A; --k-otraop:#E8C050; --k-argumento:#FF77B8; --k-idea:#FFD84D; --k-inferencia:#C29BFF; --k-vocab:#FF85C0; --k-grafico:#4FD1C5;
+    --bar:#4A6199; --bar-hl:#FFC933;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+    color-scheme:dark;
+    --bg:#0E1424; --surface:#172036; --surface-2:#1E2842; --ink:#E9EEF8; --ink-2:#AEB8CF; --ink-3:#7F8AA5; --line:#2B3754;
+    --brand:#8FA8FF; --brand-ink:#0E1424; --sun:#FFC933; --sun-bg:#3A300F; --sun-ink:#FFE08A;
+    --loc:#7EA4FF; --loc-bg:#1C2B52; --inf:#C29BFF; --inf-bg:#2E2150; --ref:#FF9A5A; --ref-bg:#43261A; --sin:#4FD6A1; --sin-bg:#123A2D;
+    --ok:#5BD98A; --ok-bg:#133A25; --bad:#FF8A80; --bad-bg:#472020;
+    --pista:#FFD84D; --pista-ink:#16203A;
+    --r:#4FC3DC; --i:#FF9A5A; --c:#5BD98A; --e:#C29BFF;
+    --k-dato:#7EA4FF; --k-causa:#4FC3DC; --k-contraste:#FF7B7B; --k-opinion:#FF9A5A; --k-otraop:#E8C050; --k-argumento:#FF77B8; --k-idea:#FFD84D; --k-inferencia:#C29BFF; --k-vocab:#FF85C0; --k-grafico:#4FD1C5;
+    --bar:#4A6199; --bar-hl:#FFC933;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.1rem;font-weight:800}
+h2{font-size:1.6rem;font-weight:800}
+h3{font-size:1.25rem;font-weight:700}
+h4{font-size:1.05rem;font-weight:700}
+p{margin:0}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:6px}
+.boot{padding:40px 16px;font-family:var(--f-display);font-size:1.3rem;color:var(--ink-2);text-align:center}
+
+/* ---------- Estructura ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:10px 16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;font-size:1.25rem;color:var(--brand);background:none;border:0;cursor:pointer;padding:0}
+.logo-mark{width:34px;height:34px;border-radius:10px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-size:1.1rem}
+.top-spacer{flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 12px;font-size:.88rem;font-weight:700;background:var(--surface-2);border:1px solid var(--line);white-space:nowrap}
+.chip.sun{background:var(--sun-bg);color:var(--sun-ink);border-color:transparent}
+.btn-menu{display:none;border:1px solid var(--line);background:var(--surface-2);border-radius:10px;padding:6px 12px;cursor:pointer;font-weight:700}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:calc(100vh - 60px)}
+.side{border-right:1px solid var(--line);background:var(--surface);padding:16px 12px;position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow:auto}
+.side nav{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:none;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:1rem;color:var(--ink)}
+.nav-item:hover{background:var(--surface-2)}
+.nav-item.on{background:var(--brand);color:var(--brand-ink);font-weight:700}
+.nav-item .ico{width:26px;text-align:center}
+.nav-item .etq{margin-left:auto;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+.side-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.main{padding-block:24px 80px;padding-inline:clamp(16px,3vw,40px);max-width:1180px;width:100%}
+.drawer-bg{position:fixed;inset:0;background:rgba(10,15,30,.45);z-index:40}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(300px,86vw);background:var(--surface);z-index:41;padding:calc(16px + env(safe-area-inset-top,0px)) 12px 16px;overflow:auto;box-shadow:var(--shadow)}
+@media (max-width:980px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .side{display:none}
+  .btn-menu{display:inline-block}
+  .hide-sm{display:none}
+}
+
+/* ---------- Piezas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.grid-2{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))}
+.muted{color:var(--ink-2)}
+.small{font-size:.9rem}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.page-head{display:flex;flex-direction:column;gap:6px;margin-bottom:22px}
+.page-head p{color:var(--ink-2);max-width:65ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:10px 18px;font-weight:700;cursor:pointer;border:2px solid transparent;background:var(--brand);color:var(--brand-ink);font-size:1rem;text-decoration:none;transition:transform .12s ease}
+.btn:active{transform:scale(.97)}
+.btn.sec{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn.sun{background:var(--sun);color:#2B2000}
+.btn.ghost{background:none;color:var(--brand);border-color:transparent;padding-inline:8px}
+.btn.big{font-size:1.2rem;padding:14px 24px;border-radius:14px;font-family:var(--f-display)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.back{margin-bottom:12px}
+.skill-chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 12px;font-weight:700;font-size:.85rem;background:var(--hb);color:var(--hc)}
+.lvl{display:inline-flex;gap:3px;align-items:center;font-size:.82rem;color:var(--ink-2);font-weight:700}
+.lvl i{width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block}
+.lvl i.on{background:var(--sun)}
+.bar{height:12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden}
+.bar > span{display:block;height:100%;border-radius:999px;background:var(--hc,var(--brand));transition:width .5s ease}
+.pill-ok{color:var(--ok);font-weight:700}
+
+/* ---------- Inicio ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.hero-main{background:var(--brand);color:var(--brand-ink);border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.hero-main h1{font-size:2.4rem}
+.hero-main p{opacity:.92;max-width:48ch}
+.hero-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(to bottom,transparent 0 33px,rgba(255,255,255,.08) 33px 34px);pointer-events:none}
+.count{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.count-nums{display:flex;gap:12px;flex-wrap:wrap}
+.count-box{flex:1;min-width:70px;background:var(--sun-bg);border-radius:14px;padding:10px;text-align:center}
+.count-box b{display:block;font-family:var(--f-display);font-size:2.3rem;line-height:1;color:var(--sun-ink);font-variant-numeric:tabular-nums}
+.count-box span{font-size:.85rem;color:var(--sun-ink);font-weight:700}
+@media (max-width:760px){.hero{grid-template-columns:minmax(0,1fr)} .hero-main h1{font-size:2rem}}
+.skill-card{border-top:5px solid var(--hc)}
+.skill-card h3{display:flex;align-items:center;gap:8px}
+.medals{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.medal{border:1px dashed var(--line);border-radius:14px;padding:12px;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center;background:var(--surface)}
+.medal .m-ico{font-size:1.9rem;filter:grayscale(1);opacity:.35}
+.medal.on{border-style:solid;border-color:var(--sun);background:var(--sun-bg)}
+.medal.on .m-ico{filter:none;opacity:1}
+.medal b{font-family:var(--f-display);font-size:1rem;line-height:1.1}
+.medal small{font-size:.78rem;color:var(--ink-2);line-height:1.25}
+
+/* ---------- Textos ---------- */
+.texto{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;font-size:1.08rem;line-height:1.75}
+.texto p{margin-bottom:14px;max-width:68ch}
+.texto h3{font-size:1.4rem;margin:2px 0 10px}
+.texto-tipo{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.texto .autor{font-style:italic;color:var(--ink-2);margin:-4px 0 12px;font-size:.95rem}
+.texto .fuente{font-size:.85rem;color:var(--ink-3);border-top:1px solid var(--line);padding-top:8px;margin-top:6px}
+mark.pista{background:var(--pista);color:var(--pista-ink);border-radius:4px;padding:1px 2px;box-shadow:0 0 0 2px var(--pista);animation:glow 1.2s ease 1}
+@keyframes glow{0%{box-shadow:0 0 0 8px rgba(244,180,0,.5)}100%{box-shadow:0 0 0 2px var(--pista)}}
+.clave{display:inline;font:inherit;line-height:inherit;border:0;padding:1px 2px;margin:0;cursor:pointer;color:inherit;background:color-mix(in srgb,var(--k) 16%,transparent);border-bottom:3px solid var(--k);border-radius:4px}
+.clave:hover,.clave.on{background:color-mix(in srgb,var(--k) 32%,transparent)}
+.clave.idea{background:color-mix(in srgb,var(--k-idea) 38%,transparent)}
+.oracion{cursor:pointer;border-radius:4px;padding:1px 0;transition:background .15s}
+.oracion:hover{background:var(--surface-2);box-shadow:0 0 0 1px var(--line)}
+.oracion.ok{background:var(--ok-bg);box-shadow:0 0 0 2px var(--ok)}
+.oracion.bad{background:var(--bad-bg);box-shadow:0 0 0 2px var(--bad)}
+.probar-aviso{background:var(--sun-bg);color:var(--sun-ink);border-radius:10px;padding:8px 12px;font-weight:700;font-size:.95rem;margin-bottom:12px}
+.leyenda{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.leyenda span{font-size:.82rem;font-weight:700;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--k) 16%,transparent);border-bottom:3px solid var(--k)}
+.tabs{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.tabs button{border:0;background:none;padding:8px 16px;border-radius:9px;cursor:pointer;font-weight:700;color:var(--ink-2)}
+.tabs button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.nota-sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(620px,calc(100% - 32px));background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--k);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.25);padding:16px 18px;z-index:50;animation:up .22s ease}
+@keyframes up{from{transform:translate(-50%,16px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.nota-sheet .n-tipo{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--k)}
+.nota-sheet .n-frag{font-family:var(--f-display);font-weight:700;font-size:1.1rem;margin:2px 0 6px}
+.nota-x{position:absolute;top:8px;right:10px;border:0;background:var(--surface-2);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:1.1rem}
+.grafico{margin:8px 0 18px;overflow-x:auto}
+.grafico svg{width:100%;min-width:320px;height:auto;display:block}
+.g-tit{font-family:var(--f-display);font-weight:700;font-size:17px;fill:var(--ink)}
+.g-tick{font-size:13px;fill:var(--ink-2);font-family:var(--f-body)}
+.g-lab{font-size:13.5px;fill:var(--ink);font-family:var(--f-body);font-weight:700}
+.g-eje{font-size:13px;fill:var(--ink-2);font-family:var(--f-body);font-style:italic}
+.g-grid{stroke:var(--line);stroke-width:1}
+.g-val{font-size:14px;font-weight:700;fill:var(--ink);font-family:var(--f-display)}
+.g-bar{fill:var(--bar);transition:fill .2s}
+.g-bar.hl{fill:var(--bar-hl)}
+.g-bar.click{cursor:pointer}
+.g-bar.click:hover{fill:var(--brand)}
+.g-badge{cursor:pointer}
+.g-badge circle{fill:var(--k-grafico);stroke:var(--surface);stroke-width:3}
+.g-badge text{fill:#fff;font-weight:700;font-size:13px;font-family:var(--f-body)}
+
+/* ---------- Ejercicios ---------- */
+.ex-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:20px;align-items:start}
+.ex-texto{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto;border-radius:var(--radius)}
+@media (max-width:980px){.ex-grid{grid-template-columns:minmax(0,1fr)} .ex-texto{position:static;max-height:none}}
+.q-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
+.q-text{font-family:var(--f-display);font-size:1.3rem;font-weight:700;line-height:1.3}
+.ops{display:flex;flex-direction:column;gap:10px}
+.op{display:flex;gap:12px;align-items:flex-start;text-align:left;border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 14px;cursor:pointer;font-size:1.02rem;transition:border-color .15s,background .15s}
+.op:hover:not(:disabled){border-color:var(--brand)}
+.op .letra{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line);font-weight:700}
+.op.ok{border-color:var(--ok);background:var(--ok-bg)}
+.op.ok .letra{background:var(--ok);color:#fff;border-color:var(--ok)}
+.op.bad{border-color:var(--bad);background:var(--bad-bg);opacity:.75;text-decoration:line-through;text-decoration-color:var(--bad)}
+.op:disabled{cursor:default}
+.fb{border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:4px;animation:pop .25s ease}
+.fb.ok{background:var(--ok-bg);border:1px solid var(--ok)}
+.fb.bad{background:var(--bad-bg);border:1px solid var(--bad)}
+.fb b{font-family:var(--f-display);font-size:1.1rem}
+.fb.ok b{color:var(--ok)} .fb.bad b{color:var(--bad)}
+@keyframes pop{from{transform:scale(.97);opacity:0}to{transform:none;opacity:1}}
+.vf-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vf-btns .op{justify-content:center;font-family:var(--f-display);font-size:1.25rem;font-weight:800}
+.ayuda{background:var(--sun-bg);color:var(--sun-ink);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.ayuda .row .btn{font-size:.95rem;padding:8px 14px}
+.match{display:flex;flex-direction:column;gap:10px}
+.m-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:stretch}
+.m-left{border:2px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--surface-2);font-weight:700;display:flex;align-items:center;cursor:pointer}
+.m-left.sel{border-color:var(--sun);box-shadow:0 0 0 3px var(--sun-bg)}
+.m-slot{border:2px dashed var(--line);border-radius:12px;min-height:52px;display:flex;align-items:center;padding:6px;cursor:pointer;transition:background .15s,border-color .15s}
+.m-slot.over{border-color:var(--brand);background:var(--loc-bg)}
+.m-slot.ok{border-style:solid;border-color:var(--ok);background:var(--ok-bg)}
+.m-slot.bad{border-style:solid;border-color:var(--bad);background:var(--bad-bg);animation:shake .35s ease}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.m-slot .ph{color:var(--ink-3);font-size:.9rem;padding-left:6px}
+.m-pool{display:flex;flex-wrap:wrap;gap:8px;padding:12px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);min-height:60px}
+.m-chip{touch-action:none;user-select:none;-webkit-user-select:none;border:2px solid var(--brand);background:var(--surface);color:var(--ink);border-radius:10px;padding:8px 12px;cursor:grab;font-size:.98rem;text-align:left;line-height:1.35}
+.m-chip.sel{background:var(--sun-bg);border-color:var(--sun)}
+.m-slot .m-chip{width:100%;border-color:transparent;background:transparent;cursor:pointer}
+.m-ghost{position:fixed;z-index:60;pointer-events:none;transform:translate(-50%,-60%) rotate(-2deg);box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:280px}
+@media (max-width:560px){.m-row{grid-template-columns:minmax(0,1fr)} .m-slot{min-height:46px}}
+.input{width:100%;font:inherit;font-size:1.1rem;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+.input:focus{border-color:var(--brand);outline:none}
+.filtros{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.fchips{display:flex;flex-wrap:wrap;gap:8px}
+.fchip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:700;font-size:.92rem;color:var(--ink-2)}
+.fchip.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.fmt-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));margin-bottom:22px}
+.fmt-card{text-align:left;cursor:pointer;border:2px solid var(--line);background:var(--surface);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.fmt-card.on{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 20%,transparent)}
+.fmt-card .f-ico{font-size:1.5rem}
+.ex-card{text-align:left;cursor:pointer;border:1px solid var(--line);border-left:6px solid var(--hc);background:var(--surface);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:transform .12s ease,box-shadow .12s}
+.ex-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.ex-card .q{font-size:.98rem;line-height:1.35}
+.ex-card .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.done-tag{font-size:.8rem;font-weight:700;color:var(--ok)}
+.player-nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap}
+
+/* ---------- Aprende / lecturas ---------- */
+.ficha-hero{border-radius:22px;padding:24px;background:var(--hb);color:var(--ink);display:flex;flex-direction:column;gap:10px;border:1px solid color-mix(in srgb,var(--hc) 30%,transparent)}
+.ficha-hero h1{color:var(--hc)}
+.ficha-hero .def{font-size:1.15rem;max-width:62ch}
+.formula{font-family:var(--f-display);font-weight:800;font-size:1.15rem;background:var(--surface);border-radius:12px;padding:10px 14px;display:inline-block;border:2px solid var(--hc);color:var(--hc)}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw span{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:4px 10px;font-size:.95rem}
+ol.pasos{margin:0;padding:0;list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:10px}
+ol.pasos li{counter-increment:p;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+ol.pasos li::before{content:counter(p);width:30px;height:30px;border-radius:50%;background:var(--hc,var(--brand));color:#fff;display:grid;place-items:center;font-weight:700;font-size:.95rem}
+.ejemplo{border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--surface-2);display:flex;flex-direction:column;gap:10px}
+.ejemplo .ctx{font-style:italic;color:var(--ink-2);border-left:4px solid var(--line);padding-left:12px}
+.piensa{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.resp{background:var(--ok-bg);border-radius:12px;padding:10px 14px;border:1px solid var(--ok)}
+.resp b{color:var(--ok)}
+.errores{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.error{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.error .mal{background:var(--bad-bg);padding:10px 14px}
+.error .bien{padding:10px 14px}
+.error .mal b{color:var(--bad)} .error .bien b{color:var(--ok)}
+.rice{display:flex;flex-direction:column;gap:6px}
+.rice-p{line-height:1.8;font-size:1.05rem}
+.rice-seg{border-radius:5px;padding:2px 4px;background:color-mix(in srgb,var(--rc) 16%,transparent);border-bottom:3px solid var(--rc)}
+.rice-seg sup{font-weight:800;color:var(--rc);font-size:.75rem;margin-right:2px}
+.rice-leg{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.rice-leg div{border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--rc) 12%,transparent);border-left:5px solid var(--rc)}
+.rice-leg b{font-family:var(--f-display);font-size:1.3rem;color:var(--rc);margin-right:6px}
+.debil{background:var(--bad-bg);border:1px solid var(--bad);border-radius:12px;padding:12px 14px}
+.lect-card{text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
+.lect-card .t-tipo{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--k-grafico)}
+.resuelta{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.paso{display:grid;grid-template-columns:28px 1fr;gap:8px;animation:pop .25s ease}
+.paso span{width:26px;height:26px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font-size:.85rem;font-weight:700}
+.claves10{counter-reset:c;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));margin:0;padding:0;list-style:none}
+.claves10 li{counter-increment:c;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px 14px 62px;position:relative}
+.claves10 li::before{content:counter(c);position:absolute;left:14px;top:14px;width:36px;height:36px;border-radius:10px;background:var(--sun);color:#2B2000;font-family:var(--f-display);font-weight:800;display:grid;place-items:center;font-size:1.2rem}
+.claves10 b{font-family:var(--f-display);font-size:1.08rem;display:block;margin-bottom:2px}
+.colores{display:flex;flex-wrap:wrap;gap:10px}
+.color-muestra{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--surface)}
+.color-muestra i{width:34px;height:18px;border-radius:5px;display:inline-block}
+
+/* ---------- Plan ---------- */
+.dia{border-radius:18px;border:1px solid var(--line);background:var(--surface);padding:18px;display:flex;flex-direction:column;gap:12px}
+.dia.hoy{border:2px solid var(--sun);box-shadow:0 0 0 4px var(--sun-bg)}
+.dia-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.tarea{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:var(--surface-2)}
+.tarea input{width:24px;height:24px;accent-color:var(--ok);flex:none;cursor:pointer}
+.tarea label{flex:1;cursor:pointer}
+.tarea.hecha label{text-decoration:line-through;color:var(--ink-3)}
+.tarea .min{font-size:.82rem;color:var(--ink-3);white-space:nowrap}
+.etapa2{font-size:.72rem;font-weight:700;border-radius:6px;padding:2px 6px;background:var(--surface);border:1px solid var(--line);color:var(--ink-3);margin-left:6px;white-space:nowrap}
+
+/* ---------- Modales ---------- */
+.modal-bg{position:fixed;inset:0;background:rgba(10,15,30,.5);z-index:70;display:grid;place-items:center;padding:16px}
+.modal{background:var(--surface);border-radius:20px;padding:24px;max-width:440px;width:100%;display:flex;flex-direction:column;gap:14px}
+.toast{position:fixed;top:calc(74px + env(safe-area-inset-top,0px));right:16px;z-index:80;background:var(--sun-bg);color:var(--sun-ink);border:2px solid var(--sun);border-radius:16px;padding:12px 16px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow);animation:pop .3s ease;max-width:calc(100% - 32px)}
+.toast .t-ico{font-size:2rem}
+.celebra{animation:celebra .5s ease}
+@keyframes celebra{40%{transform:scale(1.04)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div id="root"><div class="boot">Preparando tu Misión Lectora…</div></div>
+
+<!-- =====================================================================
+     CONFIGURACIÓN Y DATOS
+     Todo el contenido (textos, preguntas, ejercicios, plan) vive aquí.
+     Para agregar contenido, copia un elemento existente y cambia su "id".
+     ===================================================================== -->
+<script>
+window.CONFIG = {
+  alumno: "Evan",
+  fechaPrueba: "2026-10-01T08:00:00",
+  fechaRetro: "jueves 8 de octubre",
+  // ---- CÓDIGO DE COLORES DEL SUBRAYADO (cámbialo aquí si tu profesora usa otro) ----
+  colores: [
+    { id: "c1", nombre: "Amarillo", hex: "#FFE066", uso: "Idea principal" },
+    { id: "c2", nombre: "Verde",    hex: "#A7EFC2", uso: "Datos clave: quién, qué, dónde, cuándo, cuánto" },
+    { id: "c3", nombre: "Rosado",   hex: "#FBC4DF", uso: "Palabras difíciles o desconocidas" }
+  ]
+};
+
+window.DATA = {
+
+  // ---------------- HABILIDADES ----------------
+  habilidades: {
+    localizar:   { nombre: "Localizar",   icono: "🔎", css: "loc", lema: "La respuesta está escrita en el texto." },
+    inferir:     { nombre: "Inferir",     icono: "🧩", css: "inf", lema: "Pista del texto + lo que yo sé." },
+    sintetizar:  { nombre: "Sintetizar",  icono: "🎯", css: "sin", lema: "Tema, idea principal y título." },
+    reflexionar: { nombre: "Reflexionar", icono: "💬", css: "ref", lema: "Opino con evidencia: RICE." }
+  },
+
+  // ---------------- TIPOS DE CLAVES (lecturas modelo) ----------------
+  tiposClave: {
+    dato:       { n: "Dato objetivo" },
+    causa:      { n: "Causa o consecuencia" },
+    contraste:  { n: "Contraste" },
+    opinion:    { n: "Opinión del autor" },
+    otraop:     { n: "Otra opinión" },
+    argumento:  { n: "Argumento" },
+    idea:       { n: "Idea principal" },
+    inferencia: { n: "Pista para inferir" },
+    vocab:      { n: "Palabra difícil" },
+    grafico:    { n: "Lectura del gráfico" }
+  },
+
+  rice: {
+    R: { n: "Repetir", d: "Repite la pregunta al comenzar tu respuesta." },
+    I: { n: "Incluir", d: "Incluye tu opinión o la información que pide la pregunta." },
+    C: { n: "Citar",   d: "Cita evidencia del texto, entre comillas." },
+    E: { n: "Explicar", d: "Explica cómo esa cita apoya lo que dices." }
+  },
+
+  // ---------------- FICHAS APRENDE ----------------
+  fichas: {
+    localizar: {
+      definicion: "Localizar es encontrar información que está escrita tal cual en el texto. La respuesta está ahí: solo tienes que saber buscarla. En gráficos y tablas pasa lo mismo: el dato está en una barra, una fila o una columna.",
+      formula: "Pregunta → palabra ancla → vuelvo al texto → subrayo en verde",
+      palabrasClave: ["¿Qué…?", "¿Quién…?", "¿Cómo…?", "¿Cuándo…?", "¿Dónde…?", "¿Por qué…? (si el texto lo dice)", "¿Cuánto(s)…?", "Según el texto…", "El texto menciona…", "¿Cuál es el valor más alto?"],
+      pasos: [
+        "Lee la pregunta y fíjate en la palabra de pregunta: ¿dónde? pide un lugar, ¿cuándo? un momento, ¿cuánto? un número, ¿quién? una persona o animal.",
+        "Elige una palabra ancla de la pregunta (un nombre, un objeto, un lugar) y búscala con la vista en el texto.",
+        "Lee la oración completa donde aparece, y también la anterior y la siguiente.",
+        "Subraya la respuesta en verde.",
+        "Responde con las palabras del texto y comprueba: ¿contesta exactamente lo que me preguntaron?"
+      ],
+      ejemplos: [
+        {
+          titulo: "Una noticia de tu guía: «Regalo de la naturaleza»",
+          contexto: "La noticia cuenta que una ballena y su cría aparecieron en la caleta de Llico.",
+          pregunta: "¿En qué lugar aparecieron la ballena y su cría?",
+          piensa: [
+            "La palabra de pregunta es «¿en qué lugar?»: busco un LUGAR.",
+            "Palabra ancla: «ballena». La busco en el texto y leo la oración completa.",
+            "La oración menciona la caleta de Llico. La subrayo en verde."
+          ],
+          respuesta: "En la caleta de Llico."
+        },
+        {
+          titulo: "Si la pregunta pide un nombre",
+          contexto: "En la misma noticia te preguntaron el nombre de un lugareño.",
+          pregunta: "¿Cómo se llama el lugareño que aparece en la noticia?",
+          piensa: [
+            "«¿Cómo se llama?» pide un nombre propio: busco palabras con MAYÚSCULA en medio de las oraciones.",
+            "En las noticias, los nombres suelen aparecer cerca de palabras como «contó», «dijo», «explicó» o «señaló».",
+            "Copio el nombre tal como está escrito, con mayúscula."
+          ],
+          respuesta: "El nombre propio que aparece junto a «contó», «dijo» o «explicó»."
+        },
+        {
+          titulo: "En un poema también se localiza: «El canto de las ranas»",
+          contexto: "Tu guía preguntaba qué animales se mencionan, cómo están los ojos de la rana y cuándo y dónde cantan.",
+          pregunta: "¿Cuándo y dónde cantan las ranas?",
+          piensa: [
+            "Son DOS preguntas en una: ¿cuándo? (un momento) y ¿dónde? (un lugar). Tengo que responder las dos.",
+            "Busco palabras de tiempo (noche, tarde, amanecer, lluvia) y de lugar (charco, estero, agua, orilla).",
+            "Si preguntan cómo están los ojos, busco la palabra «ojos» y leo los adjetivos que la acompañan."
+          ],
+          respuesta: "Respondo con las palabras exactas del poema para el momento y para el lugar."
+        }
+      ],
+      errores: [
+        { mal: "Responder con lo que yo sé y no con lo que dice el texto.", bien: "Vuelve al texto: la respuesta tiene que estar escrita ahí." },
+        { mal: "Leer solo la palabra ancla y no la oración completa.", bien: "Lee toda la oración: el dato suele estar unas palabras más allá." },
+        { mal: "Contestar otra cosa: preguntan «cuándo» y respondo «dónde».", bien: "Subraya la palabra de pregunta antes de buscar." },
+        { mal: "En gráficos, olvidar la unidad (personas, kilos, %).", bien: "Escribe siempre el número con su unidad: «12 estudiantes»." }
+      ],
+      modelo: "tortuga"
+    },
+
+    inferir: {
+      definicion: "Inferir es descubrir algo que el texto NO dice directamente, juntando pistas del texto con lo que tú ya sabes. Es trabajo de detective. Si no puedes señalar la pista en el texto, no estás infiriendo: estás inventando.",
+      formula: "Pista del texto + lo que yo sé = inferencia",
+      palabrasClave: ["¿Cómo se sentía…?", "¿Por qué crees que…?", "¿Qué pasaría si…?", "Se puede deducir que…", "Probablemente…", "¿Qué significa la palabra ___ en el texto?", "¿Qué quiere decir…?", "¿Es común que…?"],
+      pasos: [
+        "Identifica qué te piden deducir: una emoción, una causa, una consecuencia, qué pasaría si… o el significado de una palabra.",
+        "Busca pistas: adjetivos, acciones de los personajes, lo que dicen, y palabras como «porque», «por eso», «ya que».",
+        "Junta la pista con lo que sabes. Por ejemplo: «cuando alguien aprieta los puños antes de algo importante, suele estar nervioso».",
+        "Elige la conclusión que calza con TODAS las pistas, no solo con una.",
+        "Revisa: ¿puedo mostrar con el dedo la pista que me hizo pensar esto?"
+      ],
+      ejemplos: [
+        {
+          titulo: "Noticia de tu guía: «Regalo de la naturaleza»",
+          contexto: "La noticia habla de una ballena con su cría en la caleta de Llico y usa la palabra «espectáculo».",
+          pregunta: "¿Es común ver ballenas en esa caleta?",
+          piensa: [
+            "El texto no dice «es común» ni «no es común»: tengo que inferir.",
+            "Pistas: el título lo llama «regalo» y el texto habla de «espectáculo».",
+            "Lo que sé: algo que pasa todos los días no se llama regalo ni espectáculo.",
+            "Conclusión: no es común; por eso llamó tanto la atención."
+          ],
+          respuesta: "No, no es común. Lo sé porque la noticia lo presenta como un «espectáculo» y un «regalo», palabras que se usan para algo especial."
+        },
+        {
+          titulo: "Texto informativo: «Chuteadores» (versión de práctica)",
+          contexto: "El texto explica que los tacos altos y separados se agarran mejor al pasto natural cuando está blando o mojado, y que en el gimnasio se usan zapatillas lisas.",
+          pregunta: "Si llueve, ¿qué chuteadores debería elegir para jugar en pasto natural? ¿Se podría jugar con zapatillas lisas?",
+          piensa: [
+            "Pista 1: los tacos altos y separados se agarran mejor al pasto blando o mojado.",
+            "Lo que sé: cuando llueve, el pasto se pone blando y resbaloso.",
+            "Pista 2: las zapatillas lisas son para el piso de madera del gimnasio.",
+            "Conclusión: con lluvia conviene tacos altos; con zapatillas lisas resbalaría."
+          ],
+          respuesta: "Tacos altos y separados. Con zapatillas lisas no convendría, porque no tienen nada que se agarre al pasto mojado y me resbalaría."
+        },
+        {
+          titulo: "Palabras por contexto",
+          contexto: "«El otoño cubrió la plaza de hojarasca, y los niños saltaban sobre ella para oírla crujir.»",
+          pregunta: "¿Qué significa «hojarasca»?",
+          piensa: [
+            "Busco pistas alrededor: «otoño», «cubrió la plaza», «crujir».",
+            "Lo que sé: en otoño caen las hojas, y las hojas secas crujen.",
+            "Pruebo reemplazar: «cubrió la plaza de hojas secas». La oración sigue teniendo sentido."
+          ],
+          respuesta: "Hojarasca = conjunto de hojas secas caídas de los árboles."
+        }
+      ],
+      errores: [
+        { mal: "Inventar: responder algo que suena lógico pero no tiene pista en el texto.", bien: "Toda inferencia se apoya en una pista que puedes señalar." },
+        { mal: "Quedarse con una sola pista y no mirar las demás.", bien: "Revisa que tu conclusión calce con todo el texto." },
+        { mal: "Copiar un dato cuando la pregunta pide deducir.", bien: "Si la pregunta dice «¿por qué crees…?» o «probablemente», hay que razonar." },
+        { mal: "En vocabulario, elegir el significado que conoces de otra situación.", bien: "Reemplaza la palabra en la oración y comprueba que tenga sentido." }
+      ],
+      modelo: "maite"
+    },
+
+    sintetizar: {
+      definicion: "Sintetizar es quedarte con lo más importante. Tienes que reconocer tres cosas: el TEMA (de qué trata, en pocas palabras), la IDEA PRINCIPAL (qué se dice del tema, en una oración completa) y un buen TÍTULO.",
+      formula: "Tema = pocas palabras · Idea principal = una oración con verbo",
+      palabrasClave: ["¿De qué trata el texto?", "¿Cuál es el tema?", "¿Cuál es la idea principal?", "¿Qué otro título le pondrías?", "¿Cuál oración resume mejor el texto?", "¿Dónde o cómo hallaste la idea principal?"],
+      pasos: [
+        "Lee todo el texto una vez.",
+        "Pregúntate: ¿de qué se habla en TODOS los párrafos? Eso es el tema (por ejemplo: «las abejas»).",
+        "Busca la oración que resume a las demás. Las otras son ejemplos o detalles que la apoyan.",
+        "Prueba: si borro esa oración, ¿el texto pierde su sentido? Si la respuesta es sí, es la idea principal.",
+        "Si no hay ninguna oración así, la idea está implícita: escríbela tú uniendo tema + lo que se dice de él.",
+        "Para el título: corto, atractivo y fiel a TODO el texto, no a una sola parte."
+      ],
+      extras: [
+        { titulo: "¿Dónde puede estar la idea principal?", items: [
+          { t: "Al inicio", d: "Muy común en textos informativos: primero la idea y después los ejemplos." },
+          { t: "Al final", d: "Como conclusión. Suele venir después de «por eso», «en resumen», «por lo tanto»." },
+          { t: "En el centro", d: "Algunos detalles la preparan y otros la completan." },
+          { t: "Implícita", d: "No está escrita: la deduces uniendo los detalles. Pasa mucho en cuentos y poemas." }
+        ] }
+      ],
+      ejemplos: [
+        {
+          titulo: "Texto de tu guía sobre crías de animales",
+          contexto: "El texto nombra varias crías (ternero, potrillo, renacuajo…) y termina con: «Hay muchos nombres diferentes para crías de animales».",
+          pregunta: "¿Cuál es la idea principal? ¿Dónde o cómo la hallaste?",
+          piensa: [
+            "Tema: los nombres de las crías de animales (se habla de eso en todo el texto).",
+            "Las primeras oraciones son ejemplos: una cría por oración.",
+            "La última oración reúne a todas las anteriores: es la que las resume."
+          ],
+          respuesta: "Idea principal: «Hay muchos nombres diferentes para crías de animales». La hallé en la última oración, porque las anteriores son ejemplos de lo que ella dice."
+        },
+        {
+          titulo: "Texto de tu guía: «Diferencias: abeja reina y obrera»",
+          contexto: "El texto compara el tamaño, las tareas y la duración de la vida de la reina y de las obreras.",
+          pregunta: "Tema, idea principal, título y dos diferencias.",
+          piensa: [
+            "Tema (pocas palabras): la abeja reina y las obreras.",
+            "Idea principal (oración): la reina y las obreras cumplen tareas distintas en la colmena.",
+            "Título: corto y que abarque todo, por ejemplo «Dos vidas en una colmena».",
+            "Diferencias: las busco comparando lo que el texto dice de cada una."
+          ],
+          respuesta: "Diferencias: la reina es más grande y pone huevos; las obreras son más pequeñas y hacen el trabajo de la colmena. La reina vive años y las obreras, semanas."
+        }
+      ],
+      errores: [
+        { mal: "Confundir tema con idea principal: «Las abejas» no es una idea principal.", bien: "Idea principal = oración completa: «La reina y las obreras hacen trabajos distintos»." },
+        { mal: "Elegir un detalle llamativo como idea principal («¡pone dos mil huevos!»).", bien: "Pregúntate si esa oración resume TODO el texto o solo una parte." },
+        { mal: "Poner un título que habla de una sola parte del texto.", bien: "El título debe servir para el texto completo." },
+        { mal: "Creer que la idea principal siempre está en la primera oración.", bien: "Puede estar al inicio, al final, en el centro o ser implícita." }
+      ],
+      modelo: "dormir"
+    },
+
+    reflexionar: {
+      definicion: "Reflexionar es pensar SOBRE el texto: para qué lo escribió el autor, qué opina él, qué opinan otros y qué piensas tú. No hay una única opinión correcta, pero sí respuestas mejor o peor fundamentadas: tu opinión vale cuando la apoyas con el texto.",
+      formula: "Mi opinión + evidencia del texto = respuesta RICE",
+      palabrasClave: ["¿Cuál es el propósito del texto?", "¿Para qué fue escrito?", "¿Qué opina el autor?", "¿Qué argumento da el autor?", "¿Qué otra opinión se menciona?", "¿Estás de acuerdo…? Fundamenta.", "¿Cómo pensaría…?", "¿Qué harías tú…?"],
+      pasos: [
+        "Reconoce el tipo de texto y su propósito: ¿informa, opina para convencer, narra o enseña a hacer algo?",
+        "Marca quién opina qué: el autor («creo», «en mi opinión», «debería») y los otros («algunos piensan», «hay quienes dicen»).",
+        "Busca los argumentos del autor: las razones que da para convencer («porque», «además», «en primer lugar»).",
+        "Decide qué piensas tú y busca una parte del texto que te sirva de evidencia.",
+        "Escribe tu respuesta con RICE y revisa las cuatro letras."
+      ],
+      extras: [
+        { titulo: "Los cuatro propósitos del autor", items: [
+          { t: "Informar", d: "Noticias y textos informativos. Tienen datos, fechas, lugares, cifras." },
+          { t: "Opinar para convencer", d: "Textos de opinión. Usan «creo», «pienso», «debería», «en mi opinión»." },
+          { t: "Narrar o entretener", d: "Cuentos, fábulas, poemas. Tienen personajes y acciones." },
+          { t: "Enseñar a hacer algo", d: "Instructivos y recetas. Tienen pasos y verbos como «corta», «mezcla», «pega»." }
+        ] },
+        { titulo: "Opinión del autor ≠ otras opiniones", items: [
+          { t: "Señales del autor", d: "«Yo creo», «en mi opinión», «pienso que», «a mi juicio». Suele estar al inicio o al final." },
+          { t: "Señales de otros", d: "«Algunos piensan», «hay quienes dicen», «otros opinan», «según los apoderados»." },
+          { t: "Contraste", d: "«Sin embargo», «pero», «en cambio» suelen marcar el paso de una postura a otra." },
+          { t: "Puntos de vista", d: "Ponte en los zapatos de otro: ¿cómo lo vería un papá, una profesora, un niño que no fue elegido?" }
+        ] }
+      ],
+      riceModelo: {
+        pregunta: "¿Estás de acuerdo con la opinión del autor sobre las tareas para la casa? Fundamenta.",
+        partes: [
+          { l: "R", t: "Estoy de acuerdo con la opinión del autor sobre las tareas para la casa," },
+          { l: "I", t: "porque creo que las tareas sí sirven, pero no deben ocupar toda la tarde." },
+          { l: "C", t: "El autor dice que «una tarea de diez minutos, como entrevistar a un abuelo o medir las cosas de la cocina, permite practicar sin quitarle la tarde a nadie»." },
+          { l: "E", t: "Esto apoya mi opinión porque muestra que se puede aprender en casa y, al mismo tiempo, tener tiempo para jugar y descansar, que es justo lo que preocupa a quienes están en contra." }
+        ],
+        debil: "Sí, porque es bueno.",
+        faltan: [
+          "R: no repite la pregunta. ¿«Sí» a qué?",
+          "I: la opinión es vaga. ¿Qué es lo bueno?",
+          "C: no cita nada del texto.",
+          "E: no explica por qué piensa eso."
+        ]
+      },
+      ejemplos: [
+        {
+          titulo: "Noticia de tu guía: viaje a la NASA",
+          contexto: "Una fundación premió con un viaje a la NASA a 16 niños chilenos con más de 90% de asistencia (campaña «Haz que despeguen»).",
+          pregunta: "¿Cómo pensarían los padres de los niños premiados y los de los niños no seleccionados?",
+          piensa: [
+            "La pregunta pide PUNTOS DE VISTA: dos grupos distintos pueden pensar distinto.",
+            "Padres de premiados: orgullo, alegría, sienten que el esfuerzo de ir a clases valió la pena.",
+            "Padres de no seleccionados: quizás desilusión, pero también motivación; o pueden pensar que la asistencia no depende solo del niño (enfermedades).",
+            "Ambas posturas son válidas si se explican con lo que dice la noticia."
+          ],
+          respuesta: "Los padres de los premiados estarían orgullosos, porque la noticia muestra que la asistencia tuvo recompensa. Los de los no seleccionados podrían sentirse desilusionados, pero también motivados a cuidar la asistencia."
+        },
+        {
+          titulo: "Texto de tu guía: «¿Deberíamos tener deberes en casa?»",
+          contexto: "Presenta una postura a favor (ayudan a recordar, enseñan responsabilidad), una en contra (quitan tiempo de juego y descanso, no todos tienen apoyo en casa) y la opinión del autor (deberían ser pocos y entretenidos).",
+          pregunta: "¿Cuál es la opinión del autor y cuáles son otras opiniones que menciona?",
+          piensa: [
+            "Busco la marca del autor: «yo creo» o «en mi opinión». Ahí dice que deberían ser pocos y entretenidos.",
+            "Las otras opiniones vienen con «algunos piensan» u «otros opinan»: a favor y en contra.",
+            "¡Cuidado! «Quitan tiempo de juego» NO es la opinión del autor: es de quienes están en contra."
+          ],
+          respuesta: "Opinión del autor: los deberes deberían ser pocos y entretenidos. Otras opiniones: que ayudan a recordar y enseñan responsabilidad (a favor), y que quitan tiempo de juego y descanso (en contra)."
+        }
+      ],
+      errores: [
+        { mal: "Confundir la opinión del autor con otra opinión que el autor solo menciona.", bien: "Busca las señales: «yo creo» (autor) frente a «algunos piensan» (otros)." },
+        { mal: "Opinar sin citar evidencia: «Sí, porque es bueno».", bien: "Usa RICE: la C y la E son las que dan fuerza a tu opinión." },
+        { mal: "Citar algo que no está en el texto o cambiarle las palabras.", bien: "Copia la cita exacta y ponla entre comillas." },
+        { mal: "Confundir propósito con tema: «el propósito es hablar de tortugas».", bien: "El propósito es un verbo: informar, convencer, narrar o enseñar." }
+      ],
+      modelo: "recreos"
+    }
+  },
+
+  // ---------------- MIS 10 CLAVES ----------------
+  claves10: [
+    { t: "Lee las preguntas antes que el texto", d: "Así sabes qué buscar mientras lees." },
+    { t: "Subraya con tu código de colores", d: "Amarillo, verde y rosado: cada color tiene su trabajo." },
+    { t: "Identifica la habilidad de cada pregunta", d: "¿Localizar, inferir, sintetizar o reflexionar? Cada una se responde distinto." },
+    { t: "Vuelve al texto antes de responder", d: "Aunque creas que te acuerdas. La respuesta se justifica con el texto." },
+    { t: "Lee las cuatro alternativas antes de elegir", d: "Descarta la que no aparece en el texto, la que lo contradice y la que es solo un detalle." },
+    { t: "Desconfía de las palabras absolutas", d: "«Siempre», «nunca», «todos», «nadie»: elígelas solo si el texto las respalda." },
+    { t: "«Según el autor» no es lo mismo que «según el texto»", d: "Distingue lo que opina el autor de las otras opiniones que menciona." },
+    { t: "Vocabulario: reemplaza y relee", d: "Pon el sinónimo en la oración. Si el sentido se mantiene, vas bien." },
+    { t: "Respuesta abierta = RICE", d: "Repite, incluye tu opinión, cita el texto y explica. Revisa las 4 letras." },
+    { t: "Administra el tiempo", d: "Unos 10 a 12 minutos por texto. Deja 5 minutos al final para revisar y no dejes preguntas en blanco." }
+  ],
+
+  // ---------------- TEXTOS ----------------
+  // Marcas de claves:  [[fragmento|tipo|nota]]   (tipos: ver tiposClave)
+  textos: {
+
+    // ===== LECTURAS MODELO =====
+    maite: {
+      modelo: true, tipo: "Cuento", titulo: "La carrera de Maite",
+      resumen: "Una carrera en bicicleta, una caída y una decisión difícil.",
+      parrafos: [
+        "Maite llevaba [[tres semanas|dato|Dato de tiempo: responde «¿cuánto tiempo entrenó?». Subráyalo en verde.]] entrenando en la cuesta de su barrio, en Valparaíso. Cada tarde, después de hacer las tareas, subía y bajaba en su bicicleta [[hasta que las piernas le ardían|inferencia|Pista para inferir: si entrenaba hasta que le ardían las piernas, Maite era esforzada y quería ganar.]].",
+        "El sábado de la carrera, el cielo amaneció [[encapotado|vocab|Palabra difícil. Pistas alrededor: «cielo» y, más adelante, «la calle estaba mojada». Encapotado = cubierto de nubes oscuras. Subráyala en rosado.]]. Maite se ajustó el casco y [[apretó los puños sobre el manubrio|inferencia|Acción que revela una emoción: apretar los puños muestra nervios y concentración. El texto no dice «estaba nerviosa»: tú lo deduces.]]. A su lado estaba Joaquín, su vecino, que había aprendido a andar en bicicleta ese mismo año.",
+        "Cuando sonó el silbato, Maite partió adelante. [[Sin embargo|contraste|Palabra de contraste: anuncia que algo va a cambiar. Aquí empieza el problema del cuento.]], en la curva del almacén escuchó un golpe: Joaquín se había caído [[porque|causa|Señal de causa. Lo que viene después explica POR QUÉ se cayó: la calle mojada.]] la calle estaba mojada. [[Maite dudó un segundo|inferencia|Dudar muestra que Maite tenía que elegir entre seguir para ganar o ayudar a su amigo.]]. Luego frenó, dio la vuelta y le ofreció la mano.",
+        "Llegaron juntos a la meta, en los últimos lugares. [[Por eso|causa|Señal de consecuencia: por llegar últimos, no recibieron medalla.]] nadie les dio medalla. Pero esa noche, la mamá de Joaquín tocó la puerta con un queque recién horneado. —[[Esto es para la campeona|idea|Idea principal IMPLÍCITA. Maite no ganó, pero la llaman campeona. El cuento nos hace deducir su mensaje: ayudar a otros vale más que ganar.]] —dijo. Maite [[sonrió de oreja a oreja|inferencia|Expresión que revela felicidad y orgullo.]]."
+      ],
+      resueltas: [
+        { h: "localizar", q: "¿Dónde entrenaba Maite?",
+          pasos: ["La palabra de pregunta es «dónde»: busco un LUGAR.", "Palabra ancla: «entrenando». La encuentro en el primer párrafo.", "Leo la oración completa: «entrenando en la cuesta de su barrio, en Valparaíso»."],
+          r: "En la cuesta de su barrio, en Valparaíso." },
+        { h: "inferir", q: "¿Cómo se sentía Maite antes de la partida?",
+          pasos: ["Piden una emoción que el texto no dice con esas palabras: tengo que inferir.", "Busco pistas en ese momento del cuento: «apretó los puños sobre el manubrio».", "Lo que sé: cuando alguien aprieta los puños antes de algo importante, está nervioso y concentrado.", "Otra pista: entrenó tres semanas, así que quería hacerlo bien."],
+          r: "Nerviosa y concentrada, con muchas ganas de ganar." },
+        { h: "inferir", q: "¿Por qué la mamá de Joaquín llama «campeona» a Maite, si llegó en los últimos lugares?",
+          pasos: ["El texto no explica el porqué: hay que inferir.", "Pista: Maite frenó, dio la vuelta y ayudó a Joaquín, que es hijo de esa señora.", "Lo que sé: cuando alguien ayuda a un hijo, los papás lo agradecen."],
+          r: "Porque Maite se detuvo a ayudar a Joaquín. Para su mamá, eso la hace campeona aunque no haya ganado la carrera." },
+        { h: "inferir", q: "¿Qué significa «encapotado» en el texto?",
+          pasos: ["Es vocabulario por contexto: leo la oración y lo que la rodea.", "Pistas: se habla del «cielo», y después la calle está «mojada».", "Pruebo reemplazar: «el cielo amaneció cubierto de nubes». Tiene sentido."],
+          r: "Cubierto de nubes oscuras, como cuando va a llover." },
+        { h: "sintetizar", q: "¿Cuál es el mensaje o idea principal del cuento?",
+          pasos: ["En los cuentos, la idea principal suele estar implícita.", "Junto lo importante: Maite podía ganar, pero ayudó a su amigo, y al final la llaman campeona.", "Lo digo en una oración completa."],
+          r: "Ayudar a los demás es más valioso que ganar una competencia." }
+      ]
+    },
+
+    tortuga: {
+      modelo: true, tipo: "Noticia", titulo: "Tortuga verde vuelve al mar gracias a vecinos de Tongoy",
+      resumen: "Pescadores, niños y una veterinaria salvan a una tortuga.",
+      parrafos: [
+        "[[Tongoy, 14 de marzo|dato|Lugar y fecha: las noticias los ponen al comienzo. Responden «¿dónde?» y «¿cuándo?».]]. El martes por la mañana, un grupo de pescadores encontró una tortuga verde enredada en una red abandonada, [[a 200 metros de la playa|dato|Dato exacto de lugar. Ojo: NO estaba en la playa, sino en el mar.]]. El animal, de unos [[60 kilos|dato|Cifra: responde «¿cuánto pesaba?». Fíjate en la unidad: kilos.]], tenía una herida en una aleta.",
+        "Los pescadores la llevaron a la orilla y avisaron a los especialistas. Mientras llegaban, niños y adultos la mantuvieron húmeda con baldes de agua de mar.",
+        "«[[Nunca habíamos visto una tan de cerca|inferencia|Pista para inferir: si nunca habían visto una así, NO es común ver tortugas en Tongoy. Por eso fue una gran noticia.]]. Los niños estaban [[emocionados|inferencia|Adjetivo que revela el ánimo de los habitantes.]]», contó [[Rosa Tapia|otraop|Persona entrevistada. Lo que dice entre comillas es SU experiencia, no la del periodista.]], dueña de un almacén de la caleta.",
+        "La veterinaria Carla Muñoz explicó que la tortuga sobrevivió [[gracias a que|causa|Señal de causa: explica POR QUÉ sobrevivió.]] la mantuvieron mojada y a la sombra. [[Sin embargo|contraste|Contraste: después de la buena noticia viene una advertencia importante.]], advirtió que [[cada año muchas tortugas mueren atrapadas en redes perdidas|idea|El problema de fondo que la noticia quiere que conozcas. Es una idea importante y la anuncia «sin embargo».]]. [[Por eso|causa|Consecuencia: como las redes perdidas matan tortugas, la veterinaria pide algo.]], pidió retirar del mar los [[aparejos|vocab|Palabra difícil. Pistas: «pescadores», «redes», «retirar del mar». Aparejos = herramientas de pesca, como redes y anzuelos.]] que ya no se usan.",
+        "Tras dos días de cuidados, la tortuga fue liberada frente a la caleta, entre aplausos."
+      ],
+      resueltas: [
+        { h: "localizar", q: "¿Dónde estaba la tortuga cuando la encontraron?",
+          pasos: ["«Dónde» pide un lugar. Ancla: «encontró».", "Leo la oración completa del primer párrafo.", "Cuidado con el distractor: no estaba EN la playa, sino a 200 metros."],
+          r: "Enredada en una red abandonada, a 200 metros de la playa." },
+        { h: "inferir", q: "¿Es común ver tortugas verdes en Tongoy? ¿Cómo lo sabes?",
+          pasos: ["El texto no lo dice directamente: infiero.", "Pista: Rosa Tapia dice «Nunca habíamos visto una tan de cerca».", "Otra pista: los niños estaban emocionados y la liberaron entre aplausos.", "Lo que sé: nadie se emociona así con algo que ve todos los días."],
+          r: "No es común. Lo sé porque una vecina dice «Nunca habíamos visto una tan de cerca» y todos estaban emocionados." },
+        { h: "inferir", q: "¿Por qué niños y adultos mojaban a la tortuga con baldes?",
+          pasos: ["Uno dos partes del texto: en el párrafo 2 la mojan; en el párrafo 4 la veterinaria explica que sobrevivió «gracias a que la mantuvieron mojada».", "Lo que sé: una tortuga marina vive en el agua y fuera de ella se seca."],
+          r: "Para que no se secara y pudiera sobrevivir mientras llegaban los especialistas." },
+        { h: "reflexionar", q: "¿Cuál es el propósito de este texto?",
+          pasos: ["Es una noticia: tiene fecha, lugar, cifras y personas entrevistadas.", "No dice «yo creo»: el periodista no da su opinión.", "Además advierte sobre un problema (las redes perdidas)."],
+          r: "Informar sobre el rescate de una tortuga en Tongoy y alertar sobre el peligro de las redes abandonadas." },
+        { h: "sintetizar", q: "¿Cuál es el tema de la noticia?",
+          pasos: ["Tema = de qué trata, en pocas palabras.", "Todos los párrafos hablan de la tortuga y su rescate."],
+          r: "El rescate de una tortuga verde en Tongoy." }
+      ]
+    },
+
+    dormir: {
+      modelo: true, tipo: "Texto informativo", titulo: "Dormir a la manera de cada animal",
+      resumen: "Delfines, jirafas, murciélagos y nutrias: cada uno descansa distinto.",
+      parrafos: [
+        "[[Los animales no duermen todos de la misma manera|idea|Idea principal al INICIO. Todo lo que viene después son ejemplos que la demuestran. Es muy común en los textos informativos.]]: cada especie descansa según el lugar donde vive y los peligros que enfrenta.",
+        "El delfín, por ejemplo, es un [[cetáceo|vocab|Palabra difícil (¡está en tu guía!). Pistas: el delfín, respirar, subir a la superficie. Cetáceo = mamífero que vive en el mar, como la ballena y el delfín.]] que necesita subir a la superficie para respirar. [[Por eso|causa|Consecuencia: como necesita respirar, no puede dormirse por completo.]] duerme con [[la mitad de su cerebro|dato|Dato exacto. Si te preguntan «¿cómo duerme el delfín?», la respuesta está aquí.]], mientras la otra mitad se mantiene alerta.",
+        "La jirafa duerme muy poco, a veces menos de dos horas al día, [[ya que|causa|Señal de causa: explica por qué la jirafa duerme poco.]] en la sabana hay leones y otros depredadores. [[En cambio|contraste|Contraste: compara a la jirafa con el murciélago, que duerme muchísimo.]], el murciélago puede dormir [[hasta veinte horas|dato|Cifra con unidad: horas. Responde «¿cuánto duerme?».]], colgado cabeza abajo en una cueva oscura.",
+        "Las nutrias marinas tienen una costumbre [[peculiar|vocab|Pistas: lo que sigue es algo raro y sorprendente. Peculiar = especial, poco común.]]: duermen flotando de espaldas y se toman de las patas para que la corriente no las separe.",
+        "Conocer estas costumbres nos muestra [[lo asombrosa que es la naturaleza|opinion|Esta última frase ya no es un dato: es una valoración del autor. «Asombrosa» no se puede medir ni comprobar.]]."
+      ],
+      resueltas: [
+        { h: "localizar", q: "¿Cuántas horas puede dormir un murciélago?",
+          pasos: ["«¿Cuántas horas?» pide un número con unidad.", "Ancla: «murciélago». Está en el párrafo 3, después de «En cambio»."],
+          r: "Hasta veinte horas." },
+        { h: "inferir", q: "¿Qué le pasaría a un delfín si durmiera con todo el cerebro al mismo tiempo?",
+          pasos: ["«¿Qué pasaría si…?» pide inferir una consecuencia.", "Pista: el delfín «necesita subir a la superficie para respirar».", "Lo que sé: dormido por completo no podría subir a respirar."],
+          r: "No podría subir a respirar y podría ahogarse." },
+        { h: "sintetizar", q: "¿Cuál es la idea principal y dónde está?",
+          pasos: ["Tema: cómo duermen los animales.", "La primera oración dice algo sobre el tema que abarca todo: que no duermen igual.", "Los párrafos 2, 3 y 4 son ejemplos de esa idea."],
+          r: "«Los animales no duermen todos de la misma manera». Está al inicio del texto." },
+        { h: "inferir", q: "¿Qué significa «peculiar»?",
+          pasos: ["Pistas: después de los dos puntos viene algo raro (duermen tomadas de las patas).", "Pruebo reemplazar: «una costumbre poco común». Tiene sentido."],
+          r: "Especial, poco común, rara." },
+        { h: "reflexionar", q: "La última oración, ¿es un dato o una opinión del autor?",
+          pasos: ["Un dato se puede comprobar (horas, lugares, cifras).", "«Lo asombrosa que es la naturaleza» es una valoración: no se puede medir."],
+          r: "Es una opinión del autor, porque «asombrosa» es una valoración y no un dato comprobable." }
+      ]
+    },
+
+    recreos: {
+      modelo: true, tipo: "Texto de opinión", titulo: "¿Recreos sin celular?",
+      autor: "Columna de opinión escrita por un estudiante de 8.° básico",
+      resumen: "Un estudiante defiende una postura y responde a quienes piensan distinto.",
+      parrafos: [
+        "En muchos colegios de Chile se discute si los estudiantes deberían usar el celular durante los recreos. [[Algunos apoderados piensan|otraop|OTRA opinión: no es la del autor. Señales: «algunos piensan», «hay quienes dicen», «otros opinan».]] que el teléfono es necesario para avisar en caso de emergencia. [[Otros estudiantes dicen|otraop|Otra opinión más. El autor la menciona para mostrar que conoce los dos lados de la discusión.]] que el recreo es su tiempo libre y que pueden usarlo como quieran.",
+        "[[En mi opinión|opinion|Señal de OPINIÓN DEL AUTOR. Aquí aparece lo que él piensa. Subráyalo.]], los recreos [[deberían|opinion|«Deberían» muestra una propuesta: es una opinión, no un dato.]] ser sin celular. [[En primer lugar|argumento|Aquí empieza el primer ARGUMENTO: una razón para convencerte.]], el recreo es el único momento del día para moverse, correr y jugar a la pelota. Pasar esos minutos mirando una pantalla es perder la oportunidad de despejarse. [[Además|argumento|Segundo argumento. «Además» agrega otra razón.]], cuando cada uno está con su teléfono, las conversaciones desaparecen y es más difícil hacer amigos.",
+        "[[Es cierto que|contraste|El autor reconoce la otra postura antes de responderla. Es una forma inteligente de argumentar.]] las emergencias pueden ocurrir. [[Sin embargo|contraste|Contraste: aquí el autor responde a la opinión de los apoderados.]], para eso existe el teléfono de la inspectoría, que funciona todo el día.",
+        "[[Por lo tanto|causa|Señal de conclusión: lo que sigue resume la postura del autor.]], [[creo que un recreo sin celular haría de nuestros colegios lugares más activos y más amables|idea|Idea principal y opinión del autor, al FINAL del texto.]]."
+      ],
+      resueltas: [
+        { h: "reflexionar", q: "¿Cuál es el propósito del autor?",
+          pasos: ["Busco señales: «En mi opinión», «deberían», «creo».", "Da razones para que el lector piense como él.", "No es una noticia (no informa un hecho) ni un cuento."],
+          r: "Convencer a los lectores de que los recreos deberían ser sin celular." },
+        { h: "reflexionar", q: "¿Qué opinan algunos apoderados? ¿Es la opinión del autor?",
+          pasos: ["Busco «algunos apoderados»: están en el primer párrafo.", "La señal «algunos… piensan» indica OTRA opinión.", "Además, en el párrafo 3 el autor les responde con «Sin embargo»."],
+          r: "Piensan que el celular es necesario para avisar en caso de emergencia. No es la opinión del autor: él responde que para eso existe el teléfono de la inspectoría." },
+        { h: "reflexionar", q: "¿Qué argumentos da el autor?",
+          pasos: ["Los argumentos empiezan con «En primer lugar» y «Además».", "Uno cada vez, con mis palabras."],
+          r: "1) El recreo es el único momento para moverse y jugar. 2) Con los celulares desaparecen las conversaciones y cuesta más hacer amigos." },
+        { h: "reflexionar", q: "¿Estás de acuerdo con que los recreos sean sin celular? Responde con RICE.",
+          pasos: ["No hay una sola respuesta correcta: puedo estar de acuerdo o no.", "Lo importante es fundamentar con una cita del texto.", "Mira este ejemplo que NO está de acuerdo del todo y aun así es una respuesta completa."],
+          r: "",
+          rice: [
+            { l: "R", t: "No estoy completamente de acuerdo con que los recreos sean sin celular," },
+            { l: "I", t: "porque creo que se podría permitir el celular solo un día a la semana." },
+            { l: "C", t: "El autor dice que «el recreo es el único momento del día para moverse, correr y jugar a la pelota»," },
+            { l: "E", t: "y eso es cierto, pero si se permite solo un día, los demás días igual podríamos movernos y jugar, y nadie sentiría que es un castigo." }
+          ] },
+        { h: "sintetizar", q: "¿Dónde está la idea principal?",
+          pasos: ["«Por lo tanto» anuncia una conclusión.", "La última oración resume la postura y las razones del autor."],
+          r: "Al final: «creo que un recreo sin celular haría de nuestros colegios lugares más activos y más amables»." }
+      ]
+    },
+
+    transporte: {
+      modelo: true, tipo: "Gráfico", titulo: "¿Cómo llegamos al colegio?",
+      resumen: "Una encuesta del 6.° C convertida en gráfico de barras.",
+      parrafos: [
+        "El 6.° C hizo una encuesta para saber cómo llegan sus [[34 estudiantes|dato|Total de personas encuestadas. Sirve para comparar: la mitad de 34 es 17.]] al colegio cada mañana. Cada estudiante marcó [[un solo medio de transporte|dato|Importante: cada persona cuenta una vez. Por eso las barras suman 34.]]. Estos fueron los resultados:",
+        "El curso concluyó que la mayoría no llega en auto, y propuso a la dirección instalar un estacionamiento de bicicletas [[para que|causa|Señal de finalidad: explica PARA QUÉ quieren el estacionamiento.]] más compañeros se animen a pedalear."
+      ],
+      grafico: {
+        despuesDe: 0,
+        titulo: "Medio de transporte para llegar al colegio (6.° C)",
+        ejeY: "Número de estudiantes",
+        ejeX: "Medio de transporte",
+        datos: [
+          { etiqueta: "Caminando", valor: 12 },
+          { etiqueta: "Auto", valor: 8 },
+          { etiqueta: "Micro", valor: 6 },
+          { etiqueta: "Furgón", valor: 5 },
+          { etiqueta: "Bicicleta", valor: 3 }
+        ],
+        claves: [
+          { en: "titulo", nota: "Lee SIEMPRE el título primero: dice de qué trata el gráfico y a quiénes se les preguntó (al 6.° C)." },
+          { en: "ejeY", nota: "El eje vertical dice QUÉ se mide y en qué unidad: número de estudiantes. Cada línea sube de 2 en 2." },
+          { en: "ejeX", nota: "El eje horizontal muestra las categorías: los medios de transporte." },
+          { en: "max", nota: "Valor más alto: la barra más larga. Caminando = 12 estudiantes." },
+          { en: "min", nota: "Valor más bajo: la barra más corta. Bicicleta = 3 estudiantes." }
+        ]
+      },
+      resueltas: [
+        { h: "localizar", q: "¿Cuál es el medio de transporte más usado?",
+          pasos: ["«Más usado» = valor más alto = barra más larga.", "Comparo las alturas: Caminando llega a 12."],
+          r: "Caminando: 12 estudiantes." },
+        { h: "localizar", q: "¿Cuántos estudiantes más llegan en auto que en bicicleta?",
+          pasos: ["Leo dos barras: Auto = 8 y Bicicleta = 3.", "«¿Cuántos más?» es una resta: 8 − 3."],
+          r: "5 estudiantes más." },
+        { h: "inferir", q: "Si el colegio instala el estacionamiento, ¿qué barra podría crecer el próximo año?",
+          pasos: ["Pista: el texto dice que lo proponen «para que más compañeros se animen a pedalear».", "Lo que sé: pedalear = andar en bicicleta."],
+          r: "La barra de Bicicleta." },
+        { h: "inferir", q: "¿Es verdad que «la mayoría no llega en auto»?",
+          pasos: ["La mitad de 34 es 17. «La mayoría» significa más de 17.", "Los que NO llegan en auto: 34 − 8 = 26.", "26 es más que 17."],
+          r: "Sí: 26 de 34 estudiantes no llegan en auto." },
+        { h: "inferir", q: "Si la encuesta se hiciera un día de lluvia fuerte, ¿qué barras probablemente bajarían?",
+          pasos: ["«Probablemente» me pide inferir.", "Lo que sé: con lluvia fuerte es incómodo caminar o andar en bicicleta.", "Entonces esas barras bajarían y la de Auto podría subir."],
+          r: "Caminando y Bicicleta; probablemente subiría Auto." }
+      ]
+    },
+
+    // ===== TEXTOS DE PRÁCTICA PARA LA ZONA DE EJERCICIOS =====
+    abejas: {
+      tipo: "Texto informativo", titulo: "Reina y obreras: dos vidas en una colmena",
+      parrafos: [
+        "En una colmena viven miles de abejas, pero no todas hacen lo mismo.",
+        "La abeja reina es la más grande de la colmena y su tarea principal es poner huevos: ¡puede poner cerca de dos mil en un solo día! Además, puede vivir varios años.",
+        "Las obreras, en cambio, son más pequeñas y viven solo unas semanas en verano. Ellas hacen casi todo el trabajo: limpian la colmena, alimentan a las crías, fabrican la cera y salen a recolectar néctar y polen de las flores.",
+        "Aunque la reina es muy importante, la colmena no podría sobrevivir sin el trabajo en equipo de las obreras."
+      ]
+    },
+    tareas: {
+      tipo: "Texto de opinión", titulo: "¿Deberíamos tener tareas para la casa?",
+      fuente: "Versión de práctica escrita para esta app, sobre el mismo tema de tu guía.",
+      parrafos: [
+        "Todos los años, cuando empiezan las clases, vuelve la misma discusión: ¿deberían los profesores dar tareas para la casa?",
+        "Algunas personas piensan que sí. Dicen que las tareas ayudan a recordar lo aprendido y que enseñan a ser responsables.",
+        "Otras personas opinan lo contrario. Afirman que las tareas quitan tiempo para jugar, hacer deporte y descansar. Además, no todos los niños tienen a alguien en casa que pueda ayudarlos.",
+        "Yo creo que las tareas no deberían desaparecer, pero sí deberían ser pocas y entretenidas. Una tarea de diez minutos, como entrevistar a un abuelo o medir las cosas de la cocina, permite practicar sin quitarle la tarde a nadie. Así, aprender en casa sería un gusto y no una carga."
+      ]
+    },
+    crias: {
+      tipo: "Texto informativo", titulo: "¿Cómo se llama el bebé?",
+      parrafos: [
+        "La cría de la vaca se llama ternero, y la del caballo, potrillo. El canguro recién nacido se llama joey y pasa sus primeros meses dentro de la bolsa de su madre. La cría de la rana se llama renacuajo y, al principio, ni siquiera tiene patas: nada con su cola como un pececito. Las crías del cisne y de muchas otras aves se llaman polluelos. Hay muchos nombres diferentes para crías de animales."
+      ]
+    },
+    chuteadores: {
+      tipo: "Texto informativo", titulo: "Chuteadores: elige bien tus tacos",
+      fuente: "Versión de práctica escrita para esta app, sobre el mismo tema de tu guía.",
+      parrafos: [
+        "No todos los chuteadores sirven para cualquier cancha. Elegir bien depende del suelo donde vas a jugar.",
+        "Los chuteadores de tacos altos y separados se agarran mejor al pasto natural, sobre todo cuando está blando o mojado. Los de tacos cortos y numerosos son ideales para el pasto sintético, porque reparten el peso y no se traban.",
+        "En las canchas de tierra dura conviene usar tacos de goma bajos. Por último, en el gimnasio se juega con zapatillas de suela lisa, ya que los tacos resbalan en el piso de madera y pueden rayarlo.",
+        "Elegir bien el calzado no solo ayuda a jugar mejor: también previene torceduras y caídas."
+      ]
+    }
+  },
+
+  // ---------------- ZONA DE EJERCICIOS ----------------
+  // formato: mc | match | vf | vocab     nivel: 1 básico, 2 intermedio, 3 desafío
+  // mc / vocab(mc):  op[{t, fb}], ok = índice correcto, pista = fragmento exacto del texto, barra = barra del gráfico
+  // match / vocab(unir): pares[{a, b}]
+  // vf:  v (true/false), corr[] y okCorr (si es falso), prueba (fragmento) o barras[]
+  ejercicios: [
+    // ===== OPCIÓN MÚLTIPLE =====
+    { id: "mc1", formato: "mc", nivel: 1, habilidad: "localizar", texto: "tortuga",
+      pregunta: "Según la noticia, ¿cuánto pesaba aproximadamente la tortuga?",
+      op: [
+        { t: "200 kilos", fb: "El 200 aparece en el texto, pero son los metros de distancia a la playa, no el peso. Fíjate en la unidad." },
+        { t: "60 kilos" },
+        { t: "14 kilos", fb: "El 14 es el día de la fecha (14 de marzo), no el peso." },
+        { t: "2 kilos", fb: "El 2 aparece en «dos días de cuidados»: es tiempo, no peso." }
+      ], ok: 1, pista: "de unos 60 kilos",
+      exp: "El texto dice «de unos 60 kilos». Siempre fíjate en la unidad: kilos = peso." },
+
+    { id: "mc2", formato: "mc", nivel: 1, habilidad: "localizar", texto: "dormir",
+      pregunta: "Según el texto, ¿cómo duermen las nutrias marinas?",
+      op: [
+        { t: "Colgadas cabeza abajo en una cueva.", fb: "Eso lo hace el murciélago. Vuelve a buscar la palabra «nutrias»." },
+        { t: "Con la mitad del cerebro despierta.", fb: "Así duerme el delfín, no la nutria." },
+        { t: "Flotando de espaldas y tomadas de las patas." },
+        { t: "Enterradas en la arena de la playa.", fb: "Esto no aparece en el texto: suena posible, pero no está escrito." }
+      ], ok: 2, pista: "duermen flotando de espaldas y se toman de las patas",
+      exp: "Párrafo 4: las nutrias «duermen flotando de espaldas y se toman de las patas»." },
+
+    { id: "mc3", formato: "mc", nivel: 1, habilidad: "sintetizar", texto: "abejas",
+      pregunta: "¿Cuál es el tema del texto?",
+      op: [
+        { t: "Las diferencias entre la abeja reina y las obreras." },
+        { t: "La cantidad de huevos que pone la reina.", fb: "Es un detalle llamativo, pero el texto habla de mucho más que eso." },
+        { t: "Cómo se fabrica la miel.", fb: "La miel no aparece en el texto." },
+        { t: "Las obreras son más importantes que la reina.", fb: "Eso es una opinión, y además el texto dice que la reina también es muy importante." }
+      ], ok: 0, pista: "no todas hacen lo mismo",
+      exp: "Todos los párrafos comparan a la reina con las obreras. Ese es el tema." },
+
+    { id: "mc4", formato: "mc", nivel: 1, habilidad: "localizar", texto: "chuteadores",
+      pregunta: "Según el texto, ¿qué calzado se usa en el gimnasio?",
+      op: [
+        { t: "Tacos de goma bajos.", fb: "Esos son para la tierra dura." },
+        { t: "Tacos cortos y numerosos.", fb: "Esos son para el pasto sintético." },
+        { t: "Tacos altos y separados.", fb: "Esos son para el pasto natural." },
+        { t: "Zapatillas de suela lisa." }
+      ], ok: 3, pista: "en el gimnasio se juega con zapatillas de suela lisa",
+      exp: "Párrafo 3: «en el gimnasio se juega con zapatillas de suela lisa»." },
+
+    { id: "mc5", formato: "mc", nivel: 2, habilidad: "inferir", texto: "maite",
+      pregunta: "Cuando Maite «apretó los puños sobre el manubrio», probablemente se sentía:",
+      op: [
+        { t: "Enojada con Joaquín.", fb: "Nada muestra enojo con Joaquín; de hecho, después lo ayuda." },
+        { t: "Nerviosa y concentrada antes de partir." },
+        { t: "Aburrida de esperar.", fb: "Esto contradice el texto: entrenó tres semanas, la carrera le importaba mucho." },
+        { t: "Cansada por haber entrenado esa mañana.", fb: "No aparece en el texto: ella entrenaba en las tardes." }
+      ], ok: 1, pista: "apretó los puños sobre el manubrio",
+      exp: "Pista + lo que sé: apretar los puños justo antes de una carrera muestra nervios y concentración." },
+
+    { id: "mc6", formato: "mc", nivel: 2, habilidad: "inferir", texto: "chuteadores",
+      pregunta: "Evan jugará en una cancha de pasto natural justo después de una lluvia. ¿Qué chuteadores le conviene usar?",
+      op: [
+        { t: "Tacos cortos y numerosos.", fb: "El texto dice que esos son ideales para el pasto sintético." },
+        { t: "Zapatillas de suela lisa.", fb: "Son para el gimnasio. En pasto mojado resbalaría." },
+        { t: "Tacos altos y separados." },
+        { t: "Tacos de goma bajos.", fb: "Son para tierra dura, no para pasto blando." }
+      ], ok: 2, pista: "se agarran mejor al pasto natural, sobre todo cuando está blando o mojado",
+      exp: "Pista: se agarran mejor al pasto «blando o mojado». Lo que sé: después de la lluvia el pasto está mojado." },
+
+    { id: "mc7", formato: "mc", nivel: 2, habilidad: "sintetizar", texto: "crias",
+      pregunta: "¿Dónde está la idea principal del texto sobre las crías?",
+      op: [
+        { t: "Está implícita: hay que deducirla.", fb: "En este texto sí está escrita. Busca la oración que resume a las demás." },
+        { t: "En la primera oración.", fb: "La primera oración es un ejemplo (ternero y potrillo), no un resumen." },
+        { t: "En el centro del texto.", fb: "En el centro hay más ejemplos: el canguro y la rana." },
+        { t: "En la última oración." }
+      ], ok: 3, pista: "Hay muchos nombres diferentes para crías de animales.",
+      exp: "Todas las oraciones anteriores son ejemplos. La última los reúne: es la idea principal." },
+
+    { id: "mc8", formato: "mc", nivel: 2, habilidad: "reflexionar", texto: "recreos",
+      pregunta: "¿Cuál es el propósito principal del autor del texto?",
+      op: [
+        { t: "Informar cuántos estudiantes tienen celular.", fb: "El texto no tiene cifras ni datos de ese tipo." },
+        { t: "Convencer a los lectores de que los recreos deberían ser sin celular." },
+        { t: "Narrar lo que pasó un día en el recreo.", fb: "No es un cuento: no hay personajes ni una historia." },
+        { t: "Enseñar a usar el teléfono de la inspectoría.", fb: "El teléfono es solo un detalle que usa para responder a otra opinión." }
+      ], ok: 1, pista: "En mi opinión, los recreos deberían ser sin celular",
+      exp: "Las señales «En mi opinión» y «deberían» muestran que el autor quiere convencer." },
+
+    { id: "mc9", formato: "mc", nivel: 2, habilidad: "localizar", texto: "transporte",
+      pregunta: "Según el gráfico, ¿cuántos estudiantes llegan en micro?",
+      op: [
+        { t: "5", fb: "Ese es el furgón. Sigue la barra correcta hasta el eje." },
+        { t: "8", fb: "Ese es el auto." },
+        { t: "3", fb: "Esa es la bicicleta." },
+        { t: "6" }
+      ], ok: 3, barra: "Micro",
+      exp: "La barra «Micro» llega hasta el 6 del eje de estudiantes." },
+
+    { id: "mc10", formato: "mc", nivel: 3, habilidad: "inferir", texto: "tortuga",
+      pregunta: "¿Por qué Rosa Tapia dice «Nunca habíamos visto una tan de cerca»?",
+      op: [
+        { t: "Porque en Tongoy no es común ver tortugas verdes tan cerca." },
+        { t: "Porque Rosa no sabe nadar.", fb: "No aparece en el texto: eso es inventar, no inferir." },
+        { t: "Porque las tortugas de Tongoy siempre están en la playa.", fb: "Contradice lo que dice Rosa. Además, «siempre» es una palabra absoluta sin respaldo." },
+        { t: "Porque la tortuga era muy pequeña.", fb: "Contradice el texto: pesaba unos 60 kilos." }
+      ], ok: 0, pista: "Nunca habíamos visto una tan de cerca",
+      exp: "Si nunca habían visto una así, es porque no es algo común en Tongoy. Por eso los niños estaban emocionados." },
+
+    { id: "mc11", formato: "mc", nivel: 3, habilidad: "sintetizar", texto: "dormir",
+      pregunta: "¿Cuál es la idea principal del texto?",
+      op: [
+        { t: "El murciélago puede dormir hasta veinte horas.", fb: "Es un detalle, un ejemplo. No resume todo el texto." },
+        { t: "Los delfines son cetáceos.", fb: "Es un detalle del párrafo 2." },
+        { t: "Los animales no duermen todos de la misma manera." },
+        { t: "Todos los animales duermen menos de dos horas.", fb: "Contradice el texto (el murciélago duerme veinte) y usa «todos», una palabra absoluta." }
+      ], ok: 2, pista: "Los animales no duermen todos de la misma manera",
+      exp: "La primera oración abarca todo el texto. Los párrafos siguientes son ejemplos de ella." },
+
+    { id: "mc12", formato: "mc", nivel: 3, habilidad: "reflexionar", texto: "tareas",
+      pregunta: "Según el AUTOR, ¿qué debería pasar con las tareas para la casa?",
+      op: [
+        { t: "Deberían eliminarse, porque quitan tiempo para jugar.", fb: "Esa es la opinión de «otras personas», no la del autor." },
+        { t: "Deberían ser muchas, para recordar lo aprendido.", fb: "El texto nunca dice «muchas». Lo de recordar es de quienes están a favor." },
+        { t: "Deberían ser obligatorias todos los días.", fb: "Esto no aparece en el texto." },
+        { t: "Deberían ser pocas y entretenidas." }
+      ], ok: 3, pista: "deberían ser pocas y entretenidas",
+      exp: "La opinión del autor aparece después de «Yo creo»: pocas y entretenidas." },
+
+    { id: "mc13", formato: "mc", nivel: 3, habilidad: "inferir", texto: "transporte",
+      pregunta: "¿Qué conclusión se puede sacar del gráfico?",
+      op: [
+        { t: "Más de la mitad del curso llega caminando.", fb: "La mitad de 34 es 17. Caminando llegan 12, así que no es más de la mitad." },
+        { t: "La mayoría del curso no llega en auto." },
+        { t: "Llegan más en auto que en micro y furgón juntos.", fb: "Auto = 8; micro + furgón = 6 + 5 = 11." },
+        { t: "Ningún estudiante vive lejos del colegio.", fb: "El gráfico no dice nada de distancias. Además, «ningún» es absoluto." }
+      ], ok: 1, barra: ["Auto"],
+      exp: "Llegan en auto 8 de 34. Los otros 26 no, y 26 es más que la mitad (17)." },
+
+    { id: "mc14", formato: "mc", nivel: 3, habilidad: "reflexionar", texto: "recreos",
+      pregunta: "¿Cuál de estas ideas NO es la opinión del autor, sino otra opinión que el texto menciona?",
+      op: [
+        { t: "El recreo es para moverse, correr y jugar.", fb: "Es el primer argumento del autor («En primer lugar…»)." },
+        { t: "Los recreos deberían ser sin celular.", fb: "Es justamente la opinión del autor («En mi opinión…»)." },
+        { t: "El celular es necesario para avisar en caso de emergencia." },
+        { t: "Sin celulares, los colegios serían más amables.", fb: "Es la conclusión del autor («creo que…»)." }
+      ], ok: 2, pista: "Algunos apoderados piensan que el teléfono es necesario para avisar en caso de emergencia",
+      exp: "La señal «Algunos apoderados piensan» indica otra opinión. El autor la responde con «Sin embargo»." },
+
+    // ===== MATCH (UNIR) =====
+    { id: "ma1", formato: "match", nivel: 1, habilidad: null, texto: null,
+      instruccion: "Une cada pregunta con la habilidad que pide.",
+      pares: [
+        { a: "¿En qué ciudad entrenaba Maite?", b: "Localizar" },
+        { a: "¿Cómo se sentía Maite antes de la carrera?", b: "Inferir" },
+        { a: "¿Cuál es la idea principal del cuento?", b: "Sintetizar" },
+        { a: "¿Estás de acuerdo con lo que hizo Maite? Fundamenta.", b: "Reflexionar" }
+      ], exp: "Dónde/cuándo/quién → localizar. Cómo se sentía → inferir. Idea principal → sintetizar. ¿Estás de acuerdo? → reflexionar con RICE." },
+
+    { id: "ma2", formato: "match", nivel: 1, habilidad: "localizar", texto: "chuteadores",
+      instruccion: "Une cada cancha con el calzado que recomienda el texto.",
+      pares: [
+        { a: "Pasto natural blando o mojado", b: "Tacos altos y separados" },
+        { a: "Pasto sintético", b: "Tacos cortos y numerosos" },
+        { a: "Tierra dura", b: "Tacos de goma bajos" },
+        { a: "Gimnasio", b: "Zapatillas de suela lisa" }
+      ], exp: "Toda la información está escrita en los párrafos 2 y 3." },
+
+    { id: "ma3", formato: "match", nivel: 1, habilidad: "sintetizar", texto: null,
+      instruccion: "Une cada concepto con su definición.",
+      pares: [
+        { a: "Tema", b: "De qué trata el texto, en pocas palabras." },
+        { a: "Idea principal", b: "Lo más importante que se dice del tema, en una oración." },
+        { a: "Título", b: "Nombre breve y atractivo que anuncia el tema." },
+        { a: "Detalle", b: "Dato o ejemplo que apoya la idea principal." }
+      ], exp: "Tema = pocas palabras. Idea principal = oración completa. ¡No los confundas!" },
+
+    { id: "ma4", formato: "match", nivel: 2, habilidad: "inferir", texto: "maite",
+      instruccion: "Une cada causa con su consecuencia.",
+      pares: [
+        { a: "La calle estaba mojada.", b: "Joaquín se cayó en la curva." },
+        { a: "Maite entrenó tres semanas en la cuesta.", b: "Partió adelante cuando sonó el silbato." },
+        { a: "Llegaron en los últimos lugares.", b: "Nadie les dio medalla." },
+        { a: "Maite ayudó a Joaquín.", b: "La mamá de Joaquín le llevó un queque." }
+      ], exp: "Busca las señales «porque» y «por eso» en el cuento. Algunas causas hay que inferirlas." },
+
+    { id: "ma5", formato: "match", nivel: 2, habilidad: "reflexionar", texto: null,
+      instruccion: "Une cada texto con el propósito de su autor.",
+      pares: [
+        { a: "«La carrera de Maite» (cuento)", b: "Narrar o entretener" },
+        { a: "«Tortuga verde vuelve al mar» (noticia)", b: "Informar un hecho" },
+        { a: "«¿Recreos sin celular?» (opinión)", b: "Convencer al lector" },
+        { a: "«Cómo hacer un volantín en 6 pasos» (instructivo)", b: "Enseñar a hacer algo" }
+      ], exp: "El tipo de texto es una gran pista del propósito." },
+
+    { id: "ma6", formato: "match", nivel: 2, habilidad: "reflexionar", texto: "recreos",
+      instruccion: "Une a cada persona o grupo con lo que opina en el texto.",
+      pares: [
+        { a: "El autor", b: "Los recreos deberían ser sin celular." },
+        { a: "Algunos apoderados", b: "El celular es necesario para avisar en emergencias." },
+        { a: "Otros estudiantes", b: "El recreo es tiempo libre y pueden usarlo como quieran." }
+      ], exp: "Señales: «En mi opinión» (autor), «Algunos apoderados piensan», «Otros estudiantes dicen»." },
+
+    { id: "ma7", formato: "match", nivel: 2, habilidad: "localizar", texto: "tortuga",
+      instruccion: "Une a cada persona con lo que hizo o dijo en la noticia.",
+      pares: [
+        { a: "Los pescadores", b: "Encontraron la tortuga y avisaron a los especialistas." },
+        { a: "Niños y adultos", b: "La mantuvieron húmeda con baldes de agua de mar." },
+        { a: "Rosa Tapia", b: "Contó que nunca habían visto una tan de cerca." },
+        { a: "Carla Muñoz", b: "Pidió retirar del mar los aparejos que ya no se usan." }
+      ], exp: "Busca cada nombre en el texto y lee la oración completa." },
+
+    { id: "ma8", formato: "match", nivel: 3, habilidad: "sintetizar", texto: "dormir",
+      instruccion: "Une cada párrafo con su idea principal.",
+      pares: [
+        { a: "Párrafo 1: «Los animales no duermen…»", b: "Cada animal duerme de una forma distinta." },
+        { a: "Párrafo 2: «El delfín, por ejemplo…»", b: "El delfín duerme con medio cerebro porque debe respirar." },
+        { a: "Párrafo 3: «La jirafa duerme muy poco…»", b: "La jirafa duerme poco y el murciélago, mucho." },
+        { a: "Párrafo 4: «Las nutrias marinas…»", b: "Las nutrias duermen tomadas de las patas." }
+      ], exp: "Cada párrafo tiene su propia idea principal, y la del párrafo 1 es la de todo el texto." },
+
+    { id: "ma9", formato: "match", nivel: 3, habilidad: "reflexionar", texto: "tareas",
+      instruccion: "Une cada letra de RICE con el fragmento que le corresponde.",
+      pares: [
+        { a: "R · Repetir la pregunta", b: "Estoy de acuerdo con la opinión del autor sobre las tareas," },
+        { a: "I · Incluir mi opinión", b: "porque pienso que las tareas sirven, pero no deben ocupar toda la tarde." },
+        { a: "C · Citar el texto", b: "El autor dice: «permite practicar sin quitarle la tarde a nadie»." },
+        { a: "E · Explicar", b: "Esto apoya mi idea porque muestra que se puede aprender y también tener tiempo para jugar." }
+      ], exp: "La cita siempre va entre comillas. La explicación conecta la cita con tu opinión." },
+
+    { id: "ma10", formato: "match", nivel: 3, habilidad: "inferir", texto: "dormir",
+      instruccion: "Une cada causa con la costumbre que provoca.",
+      pares: [
+        { a: "El delfín necesita subir a respirar.", b: "Duerme con la mitad del cerebro." },
+        { a: "En la sabana hay depredadores.", b: "La jirafa duerme muy poco." },
+        { a: "La corriente podría separarlas.", b: "Las nutrias se toman de las patas." }
+      ], exp: "Señales de causa: «por eso», «ya que», «para que»." },
+
+    // ===== VERDADERO O FALSO =====
+    { id: "vf1", formato: "vf", nivel: 1, habilidad: "localizar", texto: "tortuga",
+      afirmacion: "La tortuga fue encontrada en la arena de la playa.", v: false,
+      corr: ["Fue encontrada enredada en una red, a 200 metros de la playa.", "Fue encontrada en el almacén de Rosa Tapia.", "Fue encontrada por la veterinaria Carla Muñoz."], okCorr: 0,
+      prueba: "enredada en una red abandonada",
+      exp: "El texto dice que estaba enredada en una red, a 200 metros de la playa: en el mar." },
+
+    { id: "vf2", formato: "vf", nivel: 1, habilidad: "localizar", texto: "abejas",
+      afirmacion: "Las obreras viven solo unas semanas en verano.", v: true,
+      prueba: "viven solo unas semanas en verano",
+      exp: "Párrafo 3: «son más pequeñas y viven solo unas semanas en verano»." },
+
+    { id: "vf3", formato: "vf", nivel: 1, habilidad: "localizar", texto: "chuteadores",
+      afirmacion: "En el gimnasio conviene usar tacos de goma bajos.", v: false,
+      corr: ["En el gimnasio se usan tacos altos y separados.", "En el gimnasio se juega con zapatillas de suela lisa.", "En el gimnasio no se puede jugar a la pelota."], okCorr: 1,
+      prueba: "zapatillas de suela lisa",
+      exp: "Los tacos de goma son para la tierra dura. En el gimnasio: zapatillas de suela lisa." },
+
+    { id: "vf4", formato: "vf", nivel: 2, habilidad: "inferir", texto: "maite",
+      afirmacion: "Maite pensó solo en ganar y siguió pedaleando cuando Joaquín se cayó.", v: false,
+      corr: ["Maite aceleró para llegar primera.", "Maite le pidió a otro ciclista que ayudara a Joaquín.", "Maite dudó, pero frenó y volvió a ayudar a Joaquín."], okCorr: 2,
+      prueba: "Luego frenó, dio la vuelta y le ofreció la mano",
+      exp: "Maite dudó un segundo, pero eligió ayudar: «frenó, dio la vuelta y le ofreció la mano»." },
+
+    { id: "vf5", formato: "vf", nivel: 2, habilidad: "reflexionar", texto: "recreos",
+      afirmacion: "Según el autor, el celular en el recreo es necesario para las emergencias.", v: false,
+      corr: ["Eso lo piensan algunos apoderados; el autor responde que para eso existe el teléfono de la inspectoría.", "El autor dice que los celulares solo deberían usarse en clases.", "El autor piensa que las emergencias nunca ocurren."], okCorr: 0,
+      prueba: "para eso existe el teléfono de la inspectoría",
+      exp: "¡Trampa clásica! «Según el autor» no es lo mismo que «según algunos apoderados»." },
+
+    { id: "vf6", formato: "vf", nivel: 2, habilidad: "localizar", texto: "dormir",
+      afirmacion: "Según el texto, el delfín duerme con la mitad de su cerebro.", v: true,
+      prueba: "la mitad de su cerebro",
+      exp: "Párrafo 2: «duerme con la mitad de su cerebro, mientras la otra mitad se mantiene alerta»." },
+
+    { id: "vf7", formato: "vf", nivel: 2, habilidad: "sintetizar", texto: "crias",
+      afirmacion: "La idea principal del texto sobre las crías está en la primera oración.", v: false,
+      corr: ["Está implícita: no aparece escrita.", "Está en la última oración.", "Está en la oración del canguro."], okCorr: 1,
+      prueba: "Hay muchos nombres diferentes",
+      exp: "La primera oración es un ejemplo. La última resume a todas: «Hay muchos nombres diferentes para crías de animales»." },
+
+    { id: "vf8", formato: "vf", nivel: 3, habilidad: "reflexionar", texto: "tareas",
+      afirmacion: "Según el autor, las tareas para la casa deberían desaparecer.", v: false,
+      corr: ["El autor cree que deberían ser muchas y difíciles.", "El autor no da su opinión en el texto.", "El autor cree que no deben desaparecer, sino ser pocas y entretenidas."], okCorr: 2,
+      prueba: "deberían ser pocas y entretenidas",
+      exp: "Después de «Yo creo», el autor dice que no deben desaparecer, pero sí ser pocas y entretenidas." },
+
+    { id: "vf9", formato: "vf", nivel: 3, habilidad: "localizar", texto: "transporte",
+      afirmacion: "En el 6.° C llegan más estudiantes en bicicleta que en furgón escolar.", v: false,
+      corr: ["Llegan 5 en bicicleta y 3 en furgón.", "Llegan 3 en bicicleta y 5 en furgón: más en furgón.", "Llega la misma cantidad en ambos."], okCorr: 1,
+      barras: ["Bicicleta", "Furgón"],
+      exp: "Bicicleta = 3 y Furgón = 5. Compara siempre la altura de las dos barras." },
+
+    { id: "vf10", formato: "vf", nivel: 3, habilidad: "inferir", texto: "tortuga",
+      afirmacion: "Según la veterinaria, las redes abandonadas son un peligro para las tortugas.", v: true,
+      prueba: "mueren atrapadas en redes perdidas",
+      exp: "Carla Muñoz advierte que muchas tortugas «mueren atrapadas en redes perdidas». Por eso pide retirarlas." },
+
+    { id: "vf11", formato: "vf", nivel: 3, habilidad: "inferir", texto: "abejas",
+      afirmacion: "Si no hubiera obreras, la colmena podría sobrevivir igual gracias a la reina.", v: false,
+      corr: ["La colmena no podría sobrevivir sin el trabajo en equipo de las obreras.", "La reina haría el trabajo de las obreras.", "Las crías cuidarían la colmena solas."], okCorr: 0,
+      prueba: "no podría sobrevivir",
+      exp: "La última oración lo dice: la colmena «no podría sobrevivir sin el trabajo en equipo de las obreras»." },
+
+    // ===== VOCABULARIO Y SINÓNIMOS =====
+    { id: "vo1", formato: "vocab", tipo: "mc", variante: "Elige el sinónimo", nivel: 1, habilidad: "inferir", texto: "maite",
+      pregunta: "En el cuento, «el cielo amaneció encapotado». ¿Qué significa «encapotado»?",
+      op: [
+        { t: "Despejado y azul.", fb: "Contradice el texto: más adelante la calle está mojada." },
+        { t: "Cubierto de nubes oscuras." },
+        { t: "Muy caluroso.", fb: "Ninguna pista del texto habla de calor." },
+        { t: "Con arcoíris.", fb: "No hay pistas de eso en el texto." }
+      ], ok: 1, pista: "encapotado",
+      exp: "Pistas: «cielo» y «la calle estaba mojada». Encapotado = cubierto de nubes." },
+
+    { id: "vo2", formato: "vocab", tipo: "mc", variante: "Elige el sinónimo", nivel: 1, habilidad: "inferir", texto: "tortuga",
+      pregunta: "¿Qué significa «aparejos» en la noticia?",
+      op: [
+        { t: "Parejas de tortugas.", fb: "Se parece a «pareja», pero no calza: la veterinaria pide retirarlos del mar." },
+        { t: "Barcos grandes.", fb: "No hay pistas de barcos en esa oración." },
+        { t: "Turistas de la caleta.", fb: "No se puede «retirar del mar» a los turistas." },
+        { t: "Herramientas de pesca, como redes y anzuelos." }
+      ], ok: 3, pista: "aparejos",
+      exp: "Pistas: pescadores, redes, «retirar del mar los aparejos que ya no se usan»." },
+
+    { id: "vo3", formato: "vocab", tipo: "match", variante: "Une palabra y significado", nivel: 1, habilidad: "inferir", texto: null,
+      instruccion: "Palabras de tus guías: une cada palabra con su significado.",
+      pares: [
+        { a: "en torno", b: "alrededor de" },
+        { a: "hojarasca", b: "conjunto de hojas secas caídas" },
+        { a: "cetáceo", b: "mamífero marino, como la ballena" },
+        { a: "sonatina", b: "pieza musical breve y sencilla" },
+        { a: "concitar", b: "provocar o atraer (por ejemplo, la atención)" }
+      ], exp: "Si dudas, piensa en una oración con la palabra y prueba reemplazarla." },
+
+    { id: "vo4", formato: "vocab", tipo: "mc", variante: "Completa la oración", nivel: 1, habilidad: "inferir", texto: null,
+      pregunta: "Completa: «Al final del acto, la orquesta del colegio tocó una breve ______.»",
+      op: [
+        { t: "hojarasca", fb: "La hojarasca son hojas secas: no se puede tocar en una orquesta." },
+        { t: "cetáceo", fb: "Un cetáceo es un animal marino." },
+        { t: "sonatina" },
+        { t: "torno", fb: "«En torno» significa alrededor; no calza aquí." }
+      ], ok: 2,
+      exp: "Pistas: orquesta, tocó, breve. Una sonatina es una pieza musical breve." },
+
+    { id: "vo5", formato: "vocab", tipo: "mc", variante: "Reemplaza sin cambiar el sentido", nivel: 2, habilidad: "inferir", texto: null,
+      pregunta: "«Los niños se sentaron en torno a la fogata.» ¿Qué expresión puede reemplazar a «en torno a» sin cambiar el sentido?",
+      op: [
+        { t: "lejos de", fb: "Cambia el sentido: sería lo contrario." },
+        { t: "alrededor de" },
+        { t: "encima de", fb: "¡Nadie se sienta encima de una fogata!" },
+        { t: "después de", fb: "«Después» habla de tiempo, no de lugar." }
+      ], ok: 1,
+      exp: "«Se sentaron alrededor de la fogata»: el sentido se mantiene." },
+
+    { id: "vo6", formato: "vocab", tipo: "mc", variante: "Elige el sinónimo", nivel: 2, habilidad: "inferir", texto: "dormir",
+      pregunta: "«Las nutrias marinas tienen una costumbre peculiar.» ¿Qué significa «peculiar»?",
+      op: [
+        { t: "Común y corriente.", fb: "Es lo contrario: lo que sigue es algo sorprendente." },
+        { t: "Peligrosa.", fb: "Tomarse de las patas no es peligroso." },
+        { t: "Especial, poco común." },
+        { t: "Antigua.", fb: "El texto no habla de cuándo empezó esa costumbre." }
+      ], ok: 2, pista: "peculiar",
+      exp: "Después de los dos puntos viene algo raro: duermen tomadas de las patas. Peculiar = poco común." },
+
+    { id: "vo7", formato: "vocab", tipo: "mc", variante: "Completa la oración", nivel: 2, habilidad: "inferir", texto: null,
+      pregunta: "Completa: «En otoño, la plaza quedó cubierta de ______ que crujía bajo nuestros zapatos.»",
+      op: [
+        { t: "hojarasca" },
+        { t: "cetáceos", fb: "Los cetáceos viven en el mar." },
+        { t: "sonatinas", fb: "Las sonatinas se escuchan, no crujen bajo los zapatos." },
+        { t: "aparejos", fb: "Los aparejos son herramientas de pesca." }
+      ], ok: 0,
+      exp: "Pistas: otoño, cubierta, crujía. La hojarasca son hojas secas caídas." },
+
+    { id: "vo8", formato: "vocab", tipo: "mc", variante: "Reemplaza sin cambiar el sentido", nivel: 3, habilidad: "inferir", texto: null,
+      pregunta: "«El rescate de la tortuga concitó la atención de todo el pueblo.» ¿Qué palabra puede reemplazar a «concitó»?",
+      op: [
+        { t: "apagó", fb: "Es lo contrario." },
+        { t: "ocultó", fb: "No calza: todo el pueblo se enteró." },
+        { t: "explicó", fb: "Un rescate no «explica» la atención." },
+        { t: "atrajo" }
+      ], ok: 3,
+      exp: "«El rescate atrajo la atención de todo el pueblo»: el sentido se mantiene." },
+
+    { id: "vo9", formato: "vocab", tipo: "match", variante: "Une palabra y significado", nivel: 3, habilidad: "inferir", texto: "dormir",
+      instruccion: "Palabras del texto «Dormir a la manera de cada animal»: únelas con su significado.",
+      pares: [
+        { a: "superficie", b: "la parte de arriba del agua" },
+        { a: "alerta", b: "atento, vigilante" },
+        { a: "depredadores", b: "animales que cazan a otros para comer" },
+        { a: "especie", b: "grupo de animales del mismo tipo" }
+      ], exp: "Busca cada palabra en el texto y lee la oración completa." },
+
+    { id: "vo10", formato: "vocab", tipo: "escribir", variante: "Escribe un sinónimo", nivel: 3, habilidad: "inferir", texto: "tortuga",
+      pregunta: "Escribe un sinónimo de «emocionados» que funcione en la oración: «Los niños estaban emocionados».",
+      aceptadas: ["entusiasmados", "felices", "contentos", "alegres", "conmovidos", "ilusionados", "euforicos", "encantados", "impresionados", "fascinados", "maravillados", "exaltados", "asombrados", "agitados", "dichosos", "emocionadisimos"],
+      pista: "emocionados",
+      ayuda: "Piensa en cómo se siente alguien muy contento por algo que está pasando. Algunas opciones empiezan con «entu…», «ilu…» o «feli…».",
+      exp: "Palabras como «entusiasmados», «felices» o «ilusionados» mantienen el sentido." },
+
+    { id: "vo11", formato: "vocab", tipo: "mc", variante: "Elige el sinónimo", nivel: 2, habilidad: "inferir", texto: "tortuga",
+      pregunta: "«Tras dos días de cuidados, la tortuga fue liberada.» ¿Qué significa «tras» en esta oración?",
+      op: [
+        { t: "Antes de", fb: "Es lo contrario: primero la cuidaron y luego la liberaron." },
+        { t: "Después de" },
+        { t: "Durante", fb: "No la liberaron mientras la cuidaban." },
+        { t: "Sin", fb: "Sí tuvo cuidados: el texto lo dice." }
+      ], ok: 1, pista: "Tras dos días de cuidados",
+      exp: "Primero dos días de cuidados, después la liberación. «Tras» = después de." }
+  ],
+
+  // ---------------- PLAN DE 5 DÍAS ----------------
+  // ir: [vista, parámetro]. Vistas: inicio, aprende, ficha, lecturas, lectura, claves10, ejercicios, ex, plan, subrayado, rice, practica, detective, ensayo, retro
+  plan: [
+    { fecha: "2026-09-26", dia: "Sábado 26", titulo: "Lecturas modelo, subrayado y localizar", tareas: [
+      { id: "d1a", t: "Lee «Mis 10 claves para la prueba»", min: 4, ir: ["claves10"] },
+      { id: "d1b", t: "Ficha APRENDE: Localizar", min: 5, ir: ["ficha", "localizar"] },
+      { id: "d1c", t: "Lectura modelo: La carrera de Maite (con «Ver claves»)", min: 7, ir: ["lectura", "maite"] },
+      { id: "d1d", t: "Lectura modelo: Tortuga verde (noticia)", min: 6, ir: ["lectura", "tortuga"] },
+      { id: "d1e", t: "Ejercicios de localizar, nivel básico", min: 6, ir: ["ejercicios", { habilidad: "localizar" }] },
+      { id: "d1f", t: "Subrayado interactivo", min: 5, ir: ["subrayado"], etapa: 2 }
+    ] },
+    { fecha: "2026-09-27", dia: "Domingo 27", titulo: "Inferencia y vocabulario", tareas: [
+      { id: "d2a", t: "Ficha APRENDE: Inferir", min: 5, ir: ["ficha", "inferir"] },
+      { id: "d2b", t: "Lectura modelo: Dormir a la manera de cada animal", min: 7, ir: ["lectura", "dormir"] },
+      { id: "d2c", t: "Ejercicios de inferir (opción múltiple, unir, V o F)", min: 9, ir: ["ejercicios", { habilidad: "inferir" }] },
+      { id: "d2d", t: "Vocabulario y sinónimos", min: 8, ir: ["ejercicios", { formato: "vocab" }] }
+    ] },
+    { fecha: "2026-09-28", dia: "Lunes 28", titulo: "Síntesis: tema, idea principal y título", tareas: [
+      { id: "d3a", t: "Ficha APRENDE: Sintetizar", min: 6, ir: ["ficha", "sintetizar"] },
+      { id: "d3b", t: "Lectura modelo: ¿Cómo llegamos al colegio? (gráfico)", min: 7, ir: ["lectura", "transporte"] },
+      { id: "d3c", t: "Ejercicios de sintetizar", min: 8, ir: ["ejercicios", { habilidad: "sintetizar" }] },
+      { id: "d3d", t: "Desafío: une cada párrafo con su idea principal", min: 5, ir: ["ex", "ma8"] },
+      { id: "d3e", t: "Práctica por habilidad: síntesis", min: 5, ir: ["practica"], etapa: 2 }
+    ] },
+    { fecha: "2026-09-29", dia: "Martes 29", titulo: "Reflexión y Taller RICE", tareas: [
+      { id: "d4a", t: "Ficha APRENDE: Reflexionar (incluye RICE modelo)", min: 7, ir: ["ficha", "reflexionar"] },
+      { id: "d4b", t: "Lectura modelo: ¿Recreos sin celular?", min: 7, ir: ["lectura", "recreos"] },
+      { id: "d4c", t: "Ejercicios de reflexionar", min: 7, ir: ["ejercicios", { habilidad: "reflexionar" }] },
+      { id: "d4d", t: "Taller RICE: construye tu respuesta", min: 8, ir: ["rice"], etapa: 2 }
+    ] },
+    { fecha: "2026-09-30", dia: "Miércoles 30", titulo: "Ensayo general", nota: "Hoy la sesión es más larga por el ensayo (unos 40 minutos). Puedes dividirla en dos bloques con un recreo entre medio.", tareas: [
+      { id: "d5a", t: "Detective de preguntas", min: 5, ir: ["detective"], etapa: 2 },
+      { id: "d5b", t: "Ensayo de prueba cronometrado", min: 40, ir: ["ensayo"], etapa: 2 },
+      { id: "d5c", t: "Mi retroalimentación: revisa tus errores", min: 10, ir: ["retro"], etapa: 2 },
+      { id: "d5d", t: "Repasa «Mis 10 claves» antes de dormir", min: 3, ir: ["claves10"] }
+    ] }
+  ]
+};
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.7/babel.min.js"></script>
+
+<!-- =====================================================================
+     APLICACIÓN
+     ===================================================================== -->
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useMemo, useRef } = React;
+const C = window.CONFIG, D = window.DATA;
+const HAB = D.habilidades, HAB_KEYS = Object.keys(HAB);
+const TX = D.textos;
+const MODELOS = Object.keys(TX).filter(k => TX[k].modelo);
+const EX = D.ejercicios;
+const EXMAP = Object.fromEntries(EX.map(e => [e.id, e]));
+const NIVELES = { 1: "Básico", 2: "Intermedio", 3: "Desafío" };
+const FORMATOS = {
+  mc:    { n: "Opción múltiple",   ico: "🅰️", d: "Cuatro alternativas, una correcta.",          medalla: "Maestro de alternativas" },
+  match: { n: "Unir columnas",     ico: "🔗", d: "Arrastra o toca para emparejar.",               medalla: "Gran conector" },
+  vf:    { n: "Verdadero o falso", ico: "⚖️", d: "Si es falso, corrígelo y demuéstralo.",        medalla: "Detector de verdades" },
+  vocab: { n: "Vocabulario",       ico: "📚", d: "Sinónimos y palabras por contexto.",           medalla: "Coleccionista de palabras" }
+};
+const MODULOS = [
+  { id: "inicio", n: "Inicio", ico: "🏠" },
+  { id: "aprende", n: "Aprende", ico: "📘" },
+  { id: "lecturas", n: "Lecturas modelo", ico: "🔍" },
+  { id: "subrayado", n: "Subrayado", ico: "🖍️", etapa: 2, d: "Subrayarás un texto con tu código de colores y lo compararás con una versión modelo." },
+  { id: "rice", n: "Taller RICE", ico: "✍️", etapa: 2, d: "Construirás respuestas de reflexión paso a paso (R, I, C, E), elegirás la cita en el texto y practicarás «Arregla la respuesta»." },
+  { id: "ejercicios", n: "Ejercicios", ico: "🎮" },
+  { id: "practica", n: "Práctica por habilidad", ico: "📖", etapa: 2, d: "Doce textos nuevos (cuento, poema, noticia, afiche, instructivo, gráfico y más) con preguntas de las cuatro habilidades." },
+  { id: "detective", n: "Detective de preguntas", ico: "🕵️", etapa: 2, d: "Verás preguntas sin el texto y descubrirás qué habilidad piden y si necesitan RICE." },
+  { id: "ensayo", n: "Ensayo de prueba", ico: "⏱️", etapa: 2, d: "Simulacro cronometrado de 40 minutos, con 3 textos nuevos, puntaje y nota estimada de 1,0 a 7,0." },
+  { id: "retro", n: "Mi retroalimentación", ico: "🪞", etapa: 2, d: "Revisarás tus errores del ensayo y escribirás por qué te equivocaste, para preparar la guía del " + C.fechaRetro + "." },
+  { id: "plan", n: "Plan de 5 días", ico: "📅" }
+];
+const PADRE = { ficha: "aprende", lectura: "lecturas", claves10: "lecturas", ex: "ejercicios" };
+
+// ---------- utilidades ----------
+const RE_CLAVE = /\[\[(.+?)\|(\w+)\|(.+?)\]\]/g;
+const strip = s => s.replace(RE_CLAVE, "$1");
+function parseClaves(s) {
+  const out = []; const re = new RegExp(RE_CLAVE.source, "g"); let last = 0, m;
+  while ((m = re.exec(s))) {
+    if (m.index > last) out.push({ t: s.slice(last, m.index) });
+    out.push({ t: m[1], tipo: m[2], nota: m[3] });
+    last = re.lastIndex;
+  }
+  if (last < s.length) out.push({ t: s.slice(last) });
+  return out;
+}
+const oraciones = s => s.match(/[^.!?]+[.!?]+[»”"]?\s*|[^.!?]+$/g) || [s];
+function resaltar(plain, pistas, kp) {
+  const hits = [];
+  pistas.forEach(p => { const i = plain.indexOf(p); if (i >= 0) hits.push([i, i + p.length]); });
+  if (!hits.length) return plain;
+  hits.sort((a, b) => a[0] - b[0]);
+  const out = []; let last = 0;
+  hits.forEach(([a, b], k) => {
+    if (a < last) return;
+    if (a > last) out.push(plain.slice(last, a));
+    out.push(<mark key={kp + "-" + k} className="pista">{plain.slice(a, b)}</mark>);
+    last = b;
+  });
+  if (last < plain.length) out.push(plain.slice(last));
+  return out;
+}
+function hash(s) { let h = 7; for (const c of s) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h) || 1; }
+function barajar(n, seed) {
+  const a = [...Array(n).keys()]; let h = hash(seed);
+  for (let i = n - 1; i > 0; i--) { h = (h * 1103515245 + 12345) & 0x7fffffff; const j = h % (i + 1); [a[i], a[j]] = [a[j], a[i]]; }
+  if (n > 1 && a.every((v, i) => v === i)) a.push(a.shift());
+  return a;
+}
+const hoyISO = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+const hs = k => k ? { "--hc": `var(--${HAB[k].css})`, "--hb": `var(--${HAB[k].css}-bg)` } : { "--hc": "var(--ink-2)", "--hb": "var(--surface-2)" };
+const etiqueta = e => e.pregunta || (e.afirmacion ? "«" + e.afirmacion + "»" : e.instruccion);
+function faltan(now) {
+  const diff = new Date(C.fechaPrueba).getTime() - now;
+  if (diff <= 0) return null;
+  return { d: Math.floor(diff / 864e5), h: Math.floor(diff % 864e5 / 36e5), m: Math.floor(diff % 36e5 / 6e4) };
+}
+function useAhora(ms) { const [t, setT] = useState(Date.now()); useEffect(() => { const i = setInterval(() => setT(Date.now()), ms); return () => clearInterval(i); }, [ms]); return t; }
+
+// ---------- progreso ----------
+const KEY = "mision-lectora-evan-v1";
+const nuevo = () => ({ fichas: {}, lecturas: {}, claves10: false, ex: {}, plan: {}, streak: 0, best: 0, fails: {}, medallas: [] });
+function cargar() { try { const s = localStorage.getItem(KEY); if (s) return { ...nuevo(), ...JSON.parse(s) }; } catch (e) {} return nuevo(); }
+function guardar(p) { try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (e) {} }
+const lecturaLista = (p, id) => { const l = p.lecturas[id]; return !!(l && l.claves && (l.q || []).length >= TX[id].resueltas.length); };
+const diaHecho = (p, d) => d.tareas.filter(t => !t.etapa).every(t => p.plan[t.id]);
+const exHecho = (p, id) => !!(p.ex[id] && p.ex[id].done);
+
+const MEDALLAS = [
+  { id: "fichas", ico: "📘", n: "Aprendiz", d: "Completa las 4 fichas APRENDE", test: p => HAB_KEYS.every(k => p.fichas[k]) },
+  { id: "lecturas", ico: "🔍", n: "Lector con lupa", d: "Termina las 5 lecturas modelo", test: p => MODELOS.every(id => lecturaLista(p, id)) },
+  { id: "claves", ico: "🗝️", n: "Estratega", d: "Lee tus 10 claves para la prueba", test: p => p.claves10 },
+  ...Object.keys(FORMATOS).map(f => ({ id: "f-" + f, ico: FORMATOS[f].ico, n: FORMATOS[f].medalla, d: "Completa todos los ejercicios de " + FORMATOS[f].n.toLowerCase(), test: p => EX.filter(e => e.formato === f).every(e => exHecho(p, e.id)) })),
+  { id: "racha5", ico: "🔥", n: "En racha", d: "5 correctas seguidas a la primera", test: p => p.best >= 5 },
+  { id: "racha10", ico: "🚀", n: "Imparable", d: "10 correctas seguidas a la primera", test: p => p.best >= 10 },
+  { id: "plan3", ico: "📅", n: "Constancia", d: "Completa 3 días del plan", test: p => D.plan.filter(d => diaHecho(p, d)).length >= 3 }
+];
+
+// ---------- piezas pequeñas ----------
+function SkillChip({ k }) {
+  if (!k) return <span className="skill-chip" style={hs(null)}>🧭 Todas</span>;
+  return <span className="skill-chip" style={hs(k)}>{HAB[k].icono} {HAB[k].nombre}</span>;
+}
+function Lvl({ n }) { return <span className="lvl">{[1, 2, 3].map(i => <i key={i} className={i <= n ? "on" : ""} />)} {NIVELES[n]}</span>; }
+function Feedback({ tipo, titulo, children }) { return <div className={"fb " + tipo} role="status"><b>{titulo}</b><div>{children}</div></div>; }
+function RiceTexto({ partes }) {
+  return <p className="rice-p">{partes.map((s, i) => <React.Fragment key={i}><span className="rice-seg" style={{ "--rc": `var(--${s.l.toLowerCase()})` }}><sup>{s.l}</sup>{s.t}</span>{" "}</React.Fragment>)}</p>;
+}
+function Colores() {
+  return <div className="colores">{C.colores.map(c => <div key={c.id} className="color-muestra"><i style={{ background: c.hex }} /><div><b>{c.nombre}</b><div className="small muted">{c.uso}</div></div></div>)}</div>;
+}
+
+// ---------- gráfico de barras ----------
+function BarChart({ g, claves, onNota, resaltadas = [], onBar }) {
+  const W = 560, H = 340, ml = 64, mr = 16, mt = 56, mb = 70, iw = W - ml - mr, ih = H - mt - mb;
+  const max = Math.ceil(Math.max(...g.datos.map(d => d.valor)) / 2) * 2 + 2;
+  const y = v => mt + ih - v / max * ih;
+  const bw = iw / g.datos.length;
+  const cx = i => ml + bw * i + bw / 2;
+  const ticks = []; for (let t = 0; t <= max; t += 2) ticks.push(t);
+  const iMax = g.datos.reduce((a, d, i) => d.valor > g.datos[a].valor ? i : a, 0);
+  const iMin = g.datos.reduce((a, d, i) => d.valor < g.datos[a].valor ? i : a, 0);
+  const pos = { titulo: [18, 19], ejeY: [20, mt + ih / 2 - 92], ejeX: [W / 2 - 100, H - 17], max: [cx(iMax), y(g.datos[iMax].valor) - 38], min: [cx(iMin), y(g.datos[iMin].valor) - 38] };
+  const nombres = { titulo: "Título", ejeY: "Eje vertical", ejeX: "Eje horizontal", max: "Valor más alto", min: "Valor más bajo" };
+  return (
+    <figure className="grafico">
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={g.titulo}>
+        <text x={W / 2 + 10} y={24} textAnchor="middle" className="g-tit">{g.titulo}</text>
+        {ticks.map(t => <g key={t}><line x1={ml} x2={W - mr} y1={y(t)} y2={y(t)} className="g-grid" /><text x={ml - 8} y={y(t) + 4} textAnchor="end" className="g-tick">{t}</text></g>)}
+        {g.datos.map((d, i) => {
+          const hl = resaltadas.includes(d.etiqueta);
+          return <g key={d.etiqueta}>
+            <rect x={cx(i) - bw * 0.3} y={y(d.valor)} width={bw * 0.6} height={y(0) - y(d.valor)} rx="6" className={"g-bar" + (hl ? " hl" : "") + (onBar ? " click" : "")} onClick={onBar ? () => onBar(d.etiqueta) : undefined} />
+            <text x={cx(i)} y={y(d.valor) - 8} textAnchor="middle" className="g-val">{d.valor}</text>
+            <text x={cx(i)} y={mt + ih + 22} textAnchor="middle" className="g-lab">{d.etiqueta}</text>
+          </g>;
+        })}
+        <line x1={ml} x2={W - mr} y1={y(0)} y2={y(0)} stroke="currentColor" style={{ color: "var(--ink-2)" }} strokeWidth="1.5" />
+        <text x={20} y={mt + ih / 2} textAnchor="middle" className="g-eje" transform={`rotate(-90 20 ${mt + ih / 2})`}>{g.ejeY}</text>
+        <text x={W / 2 + 10} y={H - 12} textAnchor="middle" className="g-eje">{g.ejeX}</text>
+        {claves && g.claves.map((c, i) => {
+          const [bx, by] = pos[c.en];
+          return <g key={c.en} className="g-badge" role="button" tabIndex="0" onClick={() => onNota({ t: nombres[c.en], tipo: "grafico", nota: c.nota })} onKeyDown={e => { if (e.key === "Enter") onNota({ t: nombres[c.en], tipo: "grafico", nota: c.nota }); }}>
+            <circle cx={bx} cy={by} r="13" /><text x={bx} y={by + 4.5} textAnchor="middle">{i + 1}</text>
+          </g>;
+        })}
+      </svg>
+    </figure>
+  );
+}
+
+// ---------- texto (limpio, con claves, con pista o para marcar oraciones) ----------
+function TextPanel({ texto, modo = "plain", pista = null, barra = null, onSentence = null, marca = null, onBar = null, onNota = null, notaActiva = null, aviso = null }) {
+  const pistas = pista ? [].concat(pista) : [];
+  const barras = barra ? [].concat(barra) : [];
+  const renderPar = (par, pi) => {
+    if (modo === "claves") {
+      return parseClaves(par).map((s, i) => s.tipo
+        ? <button key={i} className={"clave" + (s.tipo === "idea" ? " idea" : "") + (notaActiva && notaActiva.t === s.t ? " on" : "")} style={{ "--k": `var(--k-${s.tipo})` }} onClick={() => onNota(s)}>{s.t}</button>
+        : <React.Fragment key={i}>{s.t}</React.Fragment>);
+    }
+    const plain = strip(par);
+    if (onSentence) {
+      return oraciones(plain).map((s, si) => {
+        const st = marca && marca.pi === pi && marca.si === si ? (marca.ok ? " ok" : " bad") : "";
+        return <span key={si} className={"oracion" + st} role="button" tabIndex="0" onClick={() => onSentence(pi, si, s)} onKeyDown={e => { if (e.key === "Enter") onSentence(pi, si, s); }}>{s}</span>;
+      });
+    }
+    return resaltar(plain, pistas, pi);
+  };
+  return (
+    <article className="texto">
+      {aviso && <div className="probar-aviso">{aviso}</div>}
+      <div className="texto-tipo">{texto.tipo}</div>
+      <h3>{texto.titulo}</h3>
+      {texto.autor && <div className="autor">{texto.autor}</div>}
+      {texto.parrafos.map((par, pi) => (
+        <React.Fragment key={pi}>
+          <p>{renderPar(par, pi)}</p>
+          {texto.grafico && texto.grafico.despuesDe === pi && <BarChart g={texto.grafico} claves={modo === "claves"} onNota={onNota} resaltadas={barras} onBar={onBar} />}
+        </React.Fragment>
+      ))}
+      {texto.fuente && <div className="fuente">{texto.fuente}</div>}
+    </article>
+  );
+}
+function NotaSheet({ nota, onClose }) {
+  useEffect(() => { const f = e => { if (e.key === "Escape") onClose(); }; window.addEventListener("keydown", f); return () => window.removeEventListener("keydown", f); }, []);
+  return (
+    <div className="nota-sheet" role="dialog" aria-label="Nota de la clave" style={{ "--k": `var(--k-${nota.tipo})` }}>
+      <button className="nota-x" onClick={onClose} aria-label="Cerrar">×</button>
+      <div className="n-tipo">{D.tiposClave[nota.tipo].n}</div>
+      <div className="n-frag">«{nota.t}»</div>
+      <p>{nota.nota}</p>
+    </div>
+  );
+}
+
+// =====================================================================
+// MÓDULO 1 · INICIO
+// =====================================================================
+function Inicio({ p, go }) {
+  const ahora = useAhora(30000);
+  const f = faltan(ahora);
+  const hoy = hoyISO();
+  const idx = D.plan.findIndex(d => d.fecha === hoy);
+  const queEstudio = () => {
+    if (idx >= 0) return go("plan", idx);
+    if (hoy < D.plan[0].fecha) return go("plan", 0);
+    if (hoy > D.plan[D.plan.length - 1].fecha) return go("claves10");
+    go("plan");
+  };
+  return (
+    <div className="stack" style={{ gap: 28 }}>
+      <div className="hero">
+        <div className="hero-main">
+          <div className="hero-lines" />
+          <div className="eyebrow" style={{ color: "inherit", opacity: .8 }}>Taller de Lectoescritura · 6.° básico</div>
+          <h1>¡Hola, {C.alumno}!</h1>
+          <p>Tu misión: llegar al jueves 1 de octubre leyendo como detective. Cada respuesta se justifica con el texto, y cada día bastan 25 a 30 minutos.</p>
+          <div className="row">
+            <button className="btn big sun" onClick={queEstudio}>¿Qué estudio hoy? →</button>
+          </div>
+          {idx >= 0 && <p className="small" style={{ opacity: .9 }}>Hoy toca: <b>{D.plan[idx].titulo}</b></p>}
+        </div>
+        <div className="count">
+          <div className="eyebrow">Cuenta regresiva</div>
+          {f ? <div className="count-nums">
+            <div className="count-box"><b>{f.d}</b><span>días</span></div>
+            <div className="count-box"><b>{f.h}</b><span>horas</span></div>
+            <div className="count-box"><b>{f.m}</b><span>min</span></div>
+          </div> : <h2>¡Llegó el día! Tú puedes.</h2>}
+          <p className="small muted">Prueba de comprensión lectora · jueves 1 de octubre · vale el 50% de la nota.</p>
+          <div className="row small"><span className="chip sun">🔥 Racha: {p.streak}</span><span className="chip">Mejor racha: {p.best}</span></div>
+        </div>
+      </div>
+
+      <section className="stack">
+        <h2>Tu progreso por habilidad</h2>
+        <div className="grid">
+          {HAB_KEYS.map(k => {
+            const lista = EX.filter(e => e.habilidad === k);
+            const hechos = lista.filter(e => exHecho(p, e.id)).length;
+            const pct = lista.length ? Math.round(hechos / lista.length * 100) : 0;
+            return (
+              <div key={k} className="card skill-card stack" style={{ ...hs(k), gap: 10 }}>
+                <h3>{HAB[k].icono} {HAB[k].nombre}</h3>
+                <p className="small muted">{HAB[k].lema}</p>
+                <div className="bar"><span style={{ width: pct + "%" }} /></div>
+                <div className="row small" style={{ justifyContent: "space-between" }}>
+                  <span>{hechos} de {lista.length} ejercicios</span>
+                  <span className={p.fichas[k] ? "pill-ok" : "muted"}>{p.fichas[k] ? "✓ Ficha lista" : "Ficha pendiente"}</span>
+                </div>
+                <div className="row">
+                  <button className="btn sec" style={{ padding: "6px 12px", fontSize: ".9rem" }} onClick={() => go("ficha", k)}>Ficha</button>
+                  <button className="btn sec" style={{ padding: "6px 12px", fontSize: ".9rem" }} onClick={() => go("ejercicios", { habilidad: k })}>Practicar</button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="stack">
+        <h2>Medallas</h2>
+        <div className="medals">
+          {MEDALLAS.map(m => {
+            const on = p.medallas.includes(m.id);
+            return <div key={m.id} className={"medal" + (on ? " on" : "")}><span className="m-ico">{m.ico}</span><b>{m.n}</b><small>{m.d}</small></div>;
+          })}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// =====================================================================
+// MÓDULO 2 · APRENDE
+// =====================================================================
+function Aprende({ p, go }) {
+  return (
+    <div className="stack">
+      <div className="page-head">
+        <div className="eyebrow">Módulo 2</div>
+        <h1>Aprende</h1>
+        <p>Una ficha por habilidad: qué es, cómo reconocer la pregunta, la estrategia paso a paso, ejemplos con los textos de tu profesora y los errores que conviene evitar.</p>
+      </div>
+      <div className="grid">
+        {HAB_KEYS.map(k => (
+          <button key={k} className="lect-card skill-card" style={hs(k)} onClick={() => go("ficha", k)}>
+            <span style={{ fontSize: "2rem" }}>{HAB[k].icono}</span>
+            <h3 style={{ color: "var(--hc)" }}>{HAB[k].nombre}</h3>
+            <span className="muted small">{HAB[k].lema}</span>
+            <span className={p.fichas[k] ? "pill-ok small" : "muted small"}>{p.fichas[k] ? "✓ Ficha lista" : "Por leer"}</span>
+          </button>
+        ))}
+      </div>
+      <section className="card stack">
+        <h3>Tu código de colores para subrayar</h3>
+        <p className="muted small">Úsalo en la prueba. Si tu profesora usa otros colores, se cambian al inicio del código (CONFIG).</p>
+        <Colores />
+      </section>
+    </div>
+  );
+}
+
+function Ficha({ k, p, setP, go }) {
+  const f = D.fichas[k], h = HAB[k];
+  const lista = !!p.fichas[k];
+  const marcar = () => { setP(q => ({ ...q, fichas: { ...q.fichas, [k]: true } })); go("ejercicios", { habilidad: k }); };
+  return (
+    <div className="stack" style={{ ...hs(k), gap: 22 }}>
+      <div><button className="btn ghost" onClick={() => go("aprende")}>← Todas las fichas</button></div>
+      <div className="ficha-hero">
+        <div className="eyebrow">Ficha APRENDE</div>
+        <h1>{h.icono} {h.nombre}</h1>
+        <p className="def">{f.definicion}</p>
+        <div><span className="formula">{f.formula}</span></div>
+      </div>
+
+      <div className="grid-2">
+        <section className="card stack">
+          <h3>Así se reconocen estas preguntas</h3>
+          <div className="kw">{f.palabrasClave.map((w, i) => <span key={i}>{w}</span>)}</div>
+        </section>
+        <section className="card stack">
+          <h3>Estrategia paso a paso</h3>
+          <ol className="pasos">{f.pasos.map((s, i) => <li key={i}><span>{s}</span></li>)}</ol>
+        </section>
+      </div>
+
+      {f.extras && f.extras.map((x, i) => (
+        <section key={i} className="card stack">
+          <h3>{x.titulo}</h3>
+          <div className="grid">{x.items.map((it, j) => <div key={j} className="stack" style={{ gap: 4 }}><h4 style={{ color: "var(--hc)" }}>{it.t}</h4><p className="small muted">{it.d}</p></div>)}</div>
+        </section>
+      ))}
+
+      {f.riceModelo && <RiceModelo m={f.riceModelo} />}
+
+      <section className="stack">
+        <h2>Ejemplos resueltos</h2>
+        {f.ejemplos.map((e, i) => (
+          <div key={i} className="ejemplo">
+            <div className="eyebrow">{e.titulo}</div>
+            <p className="ctx">{e.contexto}</p>
+            <div className="q-text">{e.pregunta}</div>
+            <div><b>Así lo pienso:</b></div>
+            <ol className="piensa">{e.piensa.map((s, j) => <li key={j}>{s}</li>)}</ol>
+            <div className="resp"><b>Respuesta: </b>{e.respuesta}</div>
+          </div>
+        ))}
+      </section>
+
+      <section className="stack">
+        <h2>Errores frecuentes</h2>
+        <div className="errores">
+          {f.errores.map((e, i) => <div key={i} className="error"><div className="mal"><b>✗ </b>{e.mal}</div><div className="bien"><b>✓ </b>{e.bien}</div></div>)}
+        </div>
+      </section>
+
+      <div className="card row" style={{ justifyContent: "space-between" }}>
+        <div><h3>{lista ? "Ficha lista ✓" : "¿Lo entendiste?"}</h3><p className="muted small">Mira la lectura modelo o pasa directo a practicar.</p></div>
+        <div className="row">
+          <button className="btn sec" onClick={() => go("lectura", f.modelo)}>Ver lectura modelo</button>
+          <button className="btn" onClick={marcar}>¡Lo entendí! Practicar</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RiceModelo({ m }) {
+  return (
+    <section className="card stack">
+      <h3>El modelo RICE</h3>
+      <div className="rice-leg">
+        {Object.keys(D.rice).map(l => <div key={l} style={{ "--rc": `var(--${l.toLowerCase()})` }}><b>{l}</b><strong>{D.rice[l].n}.</strong> <span className="small">{D.rice[l].d}</span></div>)}
+      </div>
+      <div className="eyebrow">Pregunta</div>
+      <div className="q-text">{m.pregunta}</div>
+      <div className="eyebrow">Respuesta completa (cada color es una letra)</div>
+      <RiceTexto partes={m.partes} />
+      <div className="eyebrow">Respuesta débil, para comparar</div>
+      <div className="debil">
+        <p style={{ fontSize: "1.15rem", fontWeight: 700 }}>«{m.debil}»</p>
+        <ul style={{ margin: "8px 0 0", paddingLeft: 20 }}>{m.faltan.map((s, i) => <li key={i}>{s}</li>)}</ul>
+      </div>
+      <p className="muted small">No hay una única opinión correcta: podrías estar en desacuerdo y tener una respuesta igual de buena, si la fundamentas con RICE.</p>
+    </section>
+  );
+}
+
+// =====================================================================
+// MÓDULO 3 · LECTURAS MODELO
+// =====================================================================
+function Lecturas({ p, go }) {
+  return (
+    <div className="stack">
+      <div className="page-head">
+        <div className="eyebrow">Módulo 3</div>
+        <h1>Lecturas modelo con claves</h1>
+        <p>Primero lee el texto solo. Después activa «Ver claves» y toca lo marcado para descubrir en qué se fija un buen lector. Al final hay preguntas resueltas paso a paso.</p>
+      </div>
+      <button className="lect-card" style={{ background: "var(--sun-bg)", borderColor: "var(--sun)" }} onClick={() => go("claves10")}>
+        <span className="t-tipo" style={{ color: "var(--sun-ink)" }}>Ficha especial</span>
+        <h3>🗝️ Mis 10 claves para la prueba</h3>
+        <span className="small" style={{ color: "var(--sun-ink)" }}>Estrategias para el día de la prueba. {p.claves10 ? "✓ Leída" : ""}</span>
+      </button>
+      <div className="grid">
+        {MODELOS.map(id => {
+          const t = TX[id], l = p.lecturas[id] || {}, n = (l.q || []).length;
+          return (
+            <button key={id} className="lect-card" onClick={() => go("lectura", id)}>
+              <span className="t-tipo">{t.tipo}</span>
+              <h3>{t.titulo}</h3>
+              <span className="muted small">{t.resumen}</span>
+              <span className="small">{lecturaLista(p, id) ? <span className="pill-ok">✓ Completa</span> : <span className="muted">{l.claves ? "Claves vistas" : "Claves sin ver"} · {n}/{t.resueltas.length} preguntas</span>}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function Lectura({ id, p, setP, go }) {
+  const t = TX[id];
+  const [modo, setModo] = useState("plain");
+  const [nota, setNota] = useState(null);
+  const est = p.lecturas[id] || { claves: false, q: [] };
+  const upd = fn => setP(q => { const cur = q.lecturas[id] || { claves: false, q: [] }; return { ...q, lecturas: { ...q.lecturas, [id]: fn(cur) } }; });
+  const verClaves = () => { setModo("claves"); if (!est.claves) upd(c => ({ ...c, claves: true })); };
+  const tipos = useMemo(() => {
+    const s = new Set(); t.parrafos.forEach(par => parseClaves(par).forEach(g => g.tipo && s.add(g.tipo)));
+    if (t.grafico) s.add("grafico");
+    return [...s];
+  }, [id]);
+  const nEx = EX.filter(e => e.texto === id).length;
+  if (!t) return <p>No encontré esa lectura.</p>;
+  return (
+    <div className="stack" style={{ gap: 20 }}>
+      <div><button className="btn ghost" onClick={() => go("lecturas")}>← Todas las lecturas</button></div>
+      <div className="page-head" style={{ marginBottom: 0 }}>
+        <div className="eyebrow">Lectura modelo · {t.tipo}</div>
+        <h1>{t.titulo}</h1>
+      </div>
+      <div className="row">
+        <div className="tabs" role="tablist">
+          <button role="tab" aria-selected={modo === "plain"} className={modo === "plain" ? "on" : ""} onClick={() => { setModo("plain"); setNota(null); }}>📄 Leer solo</button>
+          <button role="tab" aria-selected={modo === "claves"} className={modo === "claves" ? "on" : ""} onClick={verClaves}>🔑 Ver claves</button>
+        </div>
+        {modo === "claves" && <span className="muted small">Toca lo marcado{t.grafico ? " y los círculos numerados del gráfico" : ""}.</span>}
+      </div>
+      {modo === "claves" && <div className="leyenda">{tipos.map(k => <span key={k} style={{ "--k": `var(--k-${k})` }}>{D.tiposClave[k].n}</span>)}</div>}
+      <TextPanel texto={t} modo={modo} onNota={setNota} notaActiva={nota} />
+
+      <section className="stack">
+        <h2>Así pienso la respuesta…</h2>
+        <p className="muted">Intenta responder tú primero. Después revela los pasos uno por uno.</p>
+        {t.resueltas.map((r, i) => <Resuelta key={i} r={r} n={i + 1} hecha={(est.q || []).includes(i)} onHecha={() => upd(c => ({ ...c, q: [...new Set([...(c.q || []), i])] }))} />)}
+      </section>
+
+      {nEx > 0 && <div className="card row" style={{ justifyContent: "space-between" }}>
+        <div><h3>Practica con este texto</h3><p className="muted small">{nEx} ejercicios usan «{t.titulo}».</p></div>
+        <button className="btn" onClick={() => go("ejercicios", { texto: id })}>Ir a los ejercicios</button>
+      </div>}
+      {nota && <NotaSheet nota={nota} onClose={() => setNota(null)} />}
+    </div>
+  );
+}
+
+function Resuelta({ r, n, hecha, onHecha }) {
+  const total = r.pasos.length;
+  const [k, setK] = useState(hecha ? total + 1 : 0);
+  const avanzar = () => { const nk = k + 1; setK(nk); if (nk === total + 1) onHecha(); };
+  return (
+    <div className="resuelta">
+      <div className="row" style={{ justifyContent: "space-between" }}><SkillChip k={r.h} /><span className="muted small">Pregunta {n}</span></div>
+      <div className="q-text">{r.q}</div>
+      {r.pasos.slice(0, k).map((s, i) => <div className="paso" key={i}><span>{i + 1}</span><div>{s}</div></div>)}
+      {k > total && (r.rice
+        ? <div className="resp"><b>Respuesta modelo con RICE:</b><RiceTexto partes={r.rice} /></div>
+        : <div className="resp"><b>Respuesta: </b>{r.r}</div>)}
+      {k <= total && <div><button className="btn sec" onClick={avanzar}>{k === 0 ? "Así pienso la respuesta…" : k < total ? "Siguiente paso" : "Ver respuesta"}</button></div>}
+    </div>
+  );
+}
+
+function Claves10({ p, setP, go }) {
+  return (
+    <div className="stack" style={{ gap: 20 }}>
+      <div><button className="btn ghost" onClick={() => go("lecturas")}>← Lecturas modelo</button></div>
+      <div className="page-head" style={{ marginBottom: 0 }}>
+        <div className="eyebrow">Ficha especial</div>
+        <h1>Mis 10 claves para la prueba</h1>
+        <p>Son estrategias de buen lector, no trucos para adivinar. Todas terminan en lo mismo: volver al texto.</p>
+      </div>
+      <ol className="claves10">{D.claves10.map((c, i) => <li key={i}><b>{c.t}</b><span className="muted">{c.d}</span></li>)}</ol>
+      <section className="card stack"><h3>Tu código de colores</h3><Colores /></section>
+      <div className="row">
+        <button className="btn" onClick={() => { setP(q => ({ ...q, claves10: true })); go("inicio"); }}>{p.claves10 ? "✓ Leídas · volver al inicio" : "¡Las leí! Guardar"}</button>
+      </div>
+    </div>
+  );
+}
+
+// =====================================================================
+// MÓDULO 6 · ZONA DE EJERCICIOS
+// =====================================================================
+const FILTRO0 = { formato: "todos", habilidad: "todas", nivel: 0, texto: null };
+function filtrar(f) {
+  return EX.filter(e => (f.formato === "todos" || e.formato === f.formato) && (f.habilidad === "todas" || e.habilidad === f.habilidad) && (!f.nivel || e.nivel === f.nivel) && (!f.texto || e.texto === f.texto))
+    .sort((a, b) => a.nivel - b.nivel);
+}
+
+function Ejercicios({ p, go, filtro, setFiltro }) {
+  const lista = filtrar(filtro);
+  const set = (k, v) => setFiltro(f => ({ ...f, [k]: v }));
+  const fmts = ["todos", ...Object.keys(FORMATOS)];
+  return (
+    <div className="stack">
+      <div className="page-head">
+        <div className="eyebrow">Módulo 6</div>
+        <h1>Zona de ejercicios</h1>
+        <p>Elige un formato, una habilidad y un nivel. Cada respuesta tiene retroalimentación y la pista aparece resaltada en el texto. Puedes reintentar las veces que quieras.</p>
+      </div>
+      <div className="fmt-cards">
+        {fmts.map(f => {
+          const del = EX.filter(e => f === "todos" || e.formato === f);
+          const h = del.filter(e => exHecho(p, e.id)).length;
+          const info = f === "todos" ? { n: "Todos", ico: "✨", d: "Mezcla de formatos." } : FORMATOS[f];
+          return (
+            <button key={f} className={"fmt-card" + (filtro.formato === f ? " on" : "")} onClick={() => set("formato", f)}>
+              <span className="f-ico">{info.ico}</span>
+              <b>{info.n}</b>
+              <span className="small muted">{info.d}</span>
+              <div className="bar" style={{ "--hc": "var(--ok)" }}><span style={{ width: (del.length ? h / del.length * 100 : 0) + "%" }} /></div>
+              <span className="small muted">{h} de {del.length}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="filtros">
+        <div className="fchips">
+          <button className={"fchip" + (filtro.habilidad === "todas" ? " on" : "")} onClick={() => set("habilidad", "todas")}>Todas las habilidades</button>
+          {HAB_KEYS.map(k => <button key={k} className={"fchip" + (filtro.habilidad === k ? " on" : "")} onClick={() => set("habilidad", k)}>{HAB[k].icono} {HAB[k].nombre}</button>)}
+        </div>
+        <div className="fchips">
+          {[0, 1, 2, 3].map(n => <button key={n} className={"fchip" + (filtro.nivel === n ? " on" : "")} onClick={() => set("nivel", n)}>{n ? NIVELES[n] : "Todos los niveles"}</button>)}
+          {filtro.texto && <button className="fchip on" onClick={() => set("texto", null)}>Texto: {TX[filtro.texto].titulo} ✕</button>}
+        </div>
+      </div>
+      {lista.length === 0 && <div className="card"><p>No hay ejercicios con esa combinación. Prueba con otro nivel o formato.</p><button className="btn sec" style={{ marginTop: 10 }} onClick={() => setFiltro(FILTRO0)}>Quitar filtros</button></div>}
+      <div className="grid">
+        {lista.map(e => {
+          const r = p.ex[e.id];
+          return (
+            <button key={e.id} className="ex-card" style={hs(e.habilidad)} onClick={() => go("ex", e.id)}>
+              <span className="small muted">{FORMATOS[e.formato].ico} {FORMATOS[e.formato].n}{e.variante ? " · " + e.variante : ""}</span>
+              <span className="q">{etiqueta(e)}</span>
+              <div className="meta"><SkillChip k={e.habilidad} /><Lvl n={e.nivel} /></div>
+              {r && r.done && <span className="done-tag">{r.first ? "⭐ Correcta a la primera" : "✓ Resuelta"}</span>}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ExLayout({ texto, tp, children }) {
+  if (!texto) return <div style={{ maxWidth: 760 }}>{children}</div>;
+  return (
+    <div className="ex-grid">
+      <div className="ex-texto"><TextPanel texto={texto} {...tp} /></div>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+function Player({ ex, p, go, filtro, registrar, limpiarFallos }) {
+  const [intentos, setIntentos] = useState(0);
+  const [resuelto, setResuelto] = useState(false);
+  const [primera, setPrimera] = useState(false);
+  if (!ex) return <div className="card"><p>No encontré ese ejercicio.</p><button className="btn" onClick={() => go("ejercicios")}>Volver</button></div>;
+  const onAttempt = ok => {
+    registrar(ex, ok, intentos === 0);
+    if (ok) { setResuelto(true); setPrimera(intentos === 0); }
+    setIntentos(i => i + 1);
+  };
+  let lista = filtrar(filtro);
+  if (!lista.some(e => e.id === ex.id)) lista = EX;
+  const i = lista.findIndex(e => e.id === ex.id);
+  const prev = lista[i - 1], next = lista[i + 1];
+  const texto = ex.texto ? TX[ex.texto] : null;
+  const k = ex.habilidad;
+  const fallos = k ? (p.fails[k] || 0) : 0;
+  const props = { ex, texto, onAttempt };
+  let body;
+  if (ex.formato === "mc" || (ex.formato === "vocab" && ex.tipo === "mc")) body = <MC {...props} />;
+  else if (ex.formato === "match" || (ex.formato === "vocab" && ex.tipo === "match")) body = <Match {...props} />;
+  else if (ex.formato === "vf") body = <VF {...props} />;
+  else body = <Escribir {...props} />;
+  return (
+    <div className="stack" style={{ gap: 14 }}>
+      <div className="row" style={{ justifyContent: "space-between" }}>
+        <button className="btn ghost" onClick={() => go("ejercicios")}>← Zona de ejercicios</button>
+        <span className="muted small">{i + 1} de {lista.length}</span>
+      </div>
+      <div className="row">
+        <span className="chip">{FORMATOS[ex.formato].ico} {FORMATOS[ex.formato].n}{ex.variante ? " · " + ex.variante : ""}</span>
+        <SkillChip k={k} /><Lvl n={ex.nivel} />
+      </div>
+      {!resuelto && fallos >= 2 && (
+        <div className="ayuda">
+          <b>{HAB[k].nombre} te está costando un poco. ¡Es normal, así se aprende!</b>
+          <span>¿Quieres repasar antes de seguir?</span>
+          <div className="row">
+            <button className="btn sun" onClick={() => { limpiarFallos(k); go("ficha", k); }}>Repasar la ficha APRENDE</button>
+            <button className="btn sec" onClick={() => { limpiarFallos(k); go("lectura", D.fichas[k].modelo); }}>Ver la lectura modelo</button>
+            <button className="btn ghost" onClick={() => limpiarFallos(k)}>Seguir intentando</button>
+          </div>
+        </div>
+      )}
+      {body}
+      {resuelto && primera && <div className="chip sun celebra" style={{ alignSelf: "flex-start" }}>⭐ ¡A la primera! Racha: {p.streak} 🔥</div>}
+      <div className="player-nav">
+        <button className="btn sec" disabled={!prev} onClick={() => prev && go("ex", prev.id)}>← Anterior</button>
+        {next
+          ? <button className={"btn" + (resuelto ? " sun" : " sec")} onClick={() => go("ex", next.id)}>Siguiente ejercicio →</button>
+          : <button className="btn" onClick={() => go("ejercicios")}>Volver a la lista</button>}
+      </div>
+    </div>
+  );
+}
+
+// ----- a) Opción múltiple (también vocabulario) -----
+function MC({ ex, texto, onAttempt }) {
+  const [malas, setMalas] = useState([]);
+  const [ok, setOk] = useState(false);
+  const [ult, setUlt] = useState(null);
+  const elegir = i => {
+    if (ok || malas.includes(i)) return;
+    setUlt(i);
+    if (i === ex.ok) { setOk(true); onAttempt(true); }
+    else { setMalas(m => [...m, i]); onAttempt(false); }
+  };
+  const ver = ok || malas.length > 0;
+  return (
+    <ExLayout texto={texto} tp={{ pista: ver ? ex.pista : null, barra: ver ? ex.barra : null }}>
+      <div className="q-card">
+        <div className="q-text">{ex.pregunta}</div>
+        <div className="ops">
+          {ex.op.map((o, i) => (
+            <button key={i} className={"op" + (ok && i === ex.ok ? " ok" : "") + (malas.includes(i) ? " bad" : "")} disabled={ok || malas.includes(i)} onClick={() => elegir(i)}>
+              <span className="letra">{"abcd"[i]}</span><span>{o.t}</span>
+            </button>
+          ))}
+        </div>
+        {ult !== null && !ok && <Feedback tipo="bad" titulo="Todavía no">{ex.op[ult].fb} {texto ? "Mira la parte resaltada del texto y vuelve a intentarlo." : "Vuelve a intentarlo."}</Feedback>}
+        {ok && <Feedback tipo="ok" titulo={malas.length ? "¡Ahora sí!" : "¡Correcto!"}>{ex.exp}</Feedback>}
+      </div>
+    </ExLayout>
+  );
+}
+
+// ----- b) Unir columnas: arrastrar (dedo o mouse) o tocar para emparejar -----
+function Match({ ex, texto, onAttempt }) {
+  const n = ex.pares.length;
+  const orden = useMemo(() => barajar(n, ex.id), [ex.id, n]);
+  const [asig, setAsig] = useState({});
+  const [sel, setSel] = useState(null);
+  const [selL, setSelL] = useState(null);
+  const [estado, setEstado] = useState({});
+  const [listo, setListo] = useState(false);
+  const [msg, setMsg] = useState(null);
+  const [drag, setDrag] = useState(null);
+  const [over, setOver] = useState(null);
+  const dragRef = useRef(null), justDragged = useRef(false), fns = useRef({});
+
+  const colocar = (l, r) => {
+    if (listo || estado[l] === "ok") return;
+    setAsig(a => { const b = { ...a }; Object.keys(b).forEach(x => { if (b[x] === r) delete b[x]; }); b[l] = r; return b; });
+    setEstado(e => { const x = { ...e }; if (x[l] === "bad") delete x[l]; return x; });
+    setSel(null); setSelL(null); setMsg(null);
+  };
+  const quitar = r => setAsig(a => { const b = { ...a }; Object.keys(b).forEach(x => { if (b[x] === r && estado[x] !== "ok") delete b[x]; }); return b; });
+  fns.current = { colocar, quitar };
+
+  useEffect(() => {
+    const slotEn = (x, y) => { const el = document.elementFromPoint(x, y); return el ? el.closest("[data-slot],[data-pool]") : null; };
+    const move = e => {
+      const s = dragRef.current; if (!s) return;
+      if (!s.moved && Math.hypot(e.clientX - s.x0, e.clientY - s.y0) > 8) s.moved = true;
+      if (s.moved) { setDrag({ r: s.r, x: e.clientX, y: e.clientY }); const t = slotEn(e.clientX, e.clientY); setOver(t && t.dataset.slot !== undefined ? +t.dataset.slot : null); }
+    };
+    const up = e => {
+      const s = dragRef.current; if (!s) return; dragRef.current = null;
+      if (s.moved) {
+        justDragged.current = true; setTimeout(() => { justDragged.current = false; }, 60);
+        const t = slotEn(e.clientX, e.clientY);
+        if (t && t.dataset.slot !== undefined) fns.current.colocar(+t.dataset.slot, s.r);
+        else if (t && t.dataset.pool !== undefined) fns.current.quitar(s.r);
+      }
+      setDrag(null); setOver(null);
+    };
+    const cancel = () => { dragRef.current = null; setDrag(null); setOver(null); };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", cancel);
+    return () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", cancel); };
+  }, []);
+
+  const down = (e, r) => { if (listo) return; if (e.pointerType === "mouse" && e.button !== 0) return; dragRef.current = { r, x0: e.clientX, y0: e.clientY, moved: false }; };
+  const tapChip = r => { if (justDragged.current || listo) return; if (selL !== null) colocar(selL, r); else setSel(sel === r ? null : r); };
+  const tapSlot = l => {
+    if (justDragged.current || listo || estado[l] === "ok") return;
+    if (sel !== null) colocar(l, sel);
+    else if (asig[l] !== undefined) quitar(asig[l]);
+    else setSelL(selL === l ? null : l);
+  };
+  const revisar = () => {
+    const est = {}; let bien = 0;
+    for (let l = 0; l < n; l++) { const b = asig[l] === l; est[l] = b ? "ok" : "bad"; if (b) bien++; }
+    setEstado(est);
+    const todo = bien === n;
+    onAttempt(todo);
+    if (todo) { setListo(true); setMsg({ tipo: "ok", t: ex.exp }); }
+    else {
+      setMsg({ tipo: "bad", t: `Tienes ${bien} de ${n} parejas bien. Las incorrectas vuelven a la bandeja: inténtalo otra vez.` });
+      setTimeout(() => {
+        setAsig(a => { const b = {}; Object.keys(a).forEach(x => { if (a[x] === +x) b[x] = a[x]; }); return b; });
+        setEstado(e => { const x = {}; Object.keys(e).forEach(y => { if (e[y] === "ok") x[y] = "ok"; }); return x; });
+      }, 1300);
+    }
+  };
+  const usados = Object.values(asig);
+  const libres = orden.filter(r => !usados.includes(r));
+  const chip = (r, enSlot, fijo) => (
+    <div key={r} className={"m-chip" + (sel === r ? " sel" : "")} role="button" tabIndex={fijo ? -1 : 0}
+      onPointerDown={fijo ? undefined : e => down(e, r)}
+      onClick={enSlot ? undefined : () => tapChip(r)}
+      onKeyDown={enSlot ? undefined : e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tapChip(r); } }}>
+      {ex.pares[r].b}
+    </div>
+  );
+  return (
+    <ExLayout texto={texto} tp={{}}>
+      <div className="q-card">
+        <div className="q-text">{ex.instruccion}</div>
+        <p className="muted small">Arrastra cada tarjeta hasta su pareja, o toca una tarjeta y después el espacio vacío.</p>
+        <div className="match">
+          {ex.pares.map((pr, l) => (
+            <div className="m-row" key={l}>
+              <div className={"m-left" + (selL === l ? " sel" : "")} onClick={() => tapSlot(l)}>{pr.a}</div>
+              <div data-slot={l} className={"m-slot" + (over === l ? " over" : "") + (estado[l] ? " " + estado[l] : "")} onClick={() => tapSlot(l)}
+                role="button" tabIndex={0} onKeyDown={e => { if (e.key === "Enter") tapSlot(l); }}>
+                {asig[l] !== undefined ? chip(asig[l], true, estado[l] === "ok" || listo) : <span className="ph">{sel !== null ? "Toca aquí para dejarla" : "Suelta aquí"}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+        {!listo && <div className="m-pool" data-pool="1">{libres.length ? libres.map(r => chip(r, false, false)) : <span className="muted small">¡Todas ubicadas! Revisa tus parejas.</span>}</div>}
+        {!listo && <div><button className="btn" disabled={usados.length < n} onClick={revisar}>Revisar parejas</button></div>}
+        {msg && <Feedback tipo={msg.tipo} titulo={msg.tipo === "ok" ? "¡Todas correctas!" : "Casi…"}>{msg.t}</Feedback>}
+      </div>
+      {drag && <div className="m-chip m-ghost" style={{ left: drag.x, top: drag.y }}>{ex.pares[drag.r].b}</div>}
+    </ExLayout>
+  );
+}
+
+// ----- c) Verdadero o falso (con corrección y prueba en el texto) -----
+function VF({ ex, texto, onAttempt }) {
+  const [fase, setFase] = useState("responder");
+  const [msg, setMsg] = useState(null);
+  const [malasCorr, setMalasCorr] = useState([]);
+  const [marca, setMarca] = useState(null);
+  const [elegido, setElegido] = useState(null);
+  const conBarras = !!ex.barras;
+  const responder = v => {
+    if (fase !== "responder") return;
+    setElegido(v);
+    if (v !== ex.v) { setMsg({ tipo: "bad", titulo: "Revisa otra vez", t: v ? "Busca en el texto: hay una parte que no coincide con la afirmación." : "Busca en el texto: sí dice eso." }); onAttempt(false); return; }
+    if (ex.v) { setFase("listo"); setMsg({ tipo: "ok", titulo: "¡Correcto, es verdadero!", t: ex.exp }); onAttempt(true); }
+    else { setFase("corregir"); setMsg({ tipo: "ok", titulo: "¡Bien, es falso!", t: "Ahora elige la corrección." }); }
+  };
+  const corregir = i => {
+    if (malasCorr.includes(i)) return;
+    if (i === ex.okCorr) { setFase("probar"); setMsg({ tipo: "ok", titulo: "Exacto.", t: conBarras ? "Último paso: toca en el gráfico una barra que lo demuestre." : "Último paso: toca en el texto la oración que lo demuestra." }); }
+    else { setMalasCorr(m => [...m, i]); setMsg({ tipo: "bad", titulo: "Esa corrección no calza", t: "Vuelve al texto y compara." }); onAttempt(false); }
+  };
+  const terminar = () => { setFase("listo"); setMsg({ tipo: "ok", titulo: "¡Lo demostraste!", t: ex.exp }); onAttempt(true); };
+  const probarOracion = (pi, si, s) => {
+    if (fase !== "probar") return;
+    const ok = s.includes(ex.prueba);
+    setMarca({ pi, si, ok });
+    if (ok) terminar(); else setMsg({ tipo: "bad", titulo: "Esa oración no lo demuestra", t: "Busca otra: debe decir lo que escribiste en la corrección." });
+  };
+  const probarBarra = et => {
+    if (fase !== "probar") return;
+    if (ex.barras.includes(et)) terminar(); else setMsg({ tipo: "bad", titulo: "Esa barra no sirve", t: "Busca las barras que se comparan en la afirmación." });
+  };
+  const tp = fase === "probar"
+    ? (conBarras ? { onBar: probarBarra, aviso: "👆 Toca la barra que lo demuestra" } : { onSentence: probarOracion, marca, aviso: "👆 Toca la oración que lo demuestra" })
+    : fase === "listo" ? (conBarras ? { barra: ex.barras } : { pista: ex.prueba }) : {};
+  return (
+    <ExLayout texto={texto} tp={tp}>
+      <div className="q-card">
+        <div className="eyebrow">¿Verdadero o falso?</div>
+        <div className="q-text">«{ex.afirmacion}»</div>
+        <div className="vf-btns">
+          {[true, false].map(v => (
+            <button key={String(v)} className={"op" + (fase !== "responder" && v === ex.v ? " ok" : "") + (fase === "responder" && elegido === v && v !== ex.v ? " bad" : "")} disabled={fase !== "responder"} onClick={() => responder(v)}>
+              {v ? "Verdadero" : "Falso"}
+            </button>
+          ))}
+        </div>
+        {(fase === "corregir" || ((fase === "probar" || fase === "listo") && !ex.v)) && (
+          <div className="stack" style={{ gap: 8 }}>
+            <b>¿Cuál es la afirmación correcta?</b>
+            <div className="ops">
+              {ex.corr.map((c, i) => (
+                <button key={i} className={"op" + (fase !== "corregir" && i === ex.okCorr ? " ok" : "") + (malasCorr.includes(i) ? " bad" : "")} disabled={fase !== "corregir" || malasCorr.includes(i)} onClick={() => corregir(i)}>
+                  <span className="letra">{"abc"[i]}</span><span>{c}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {msg && <Feedback tipo={msg.tipo} titulo={msg.titulo}>{msg.t}</Feedback>}
+      </div>
+    </ExLayout>
+  );
+}
+
+// ----- d) Vocabulario: escribir un sinónimo -----
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z]/g, "");
+function Escribir({ ex, texto, onAttempt }) {
+  const [v, setV] = useState("");
+  const [fallos, setFallos] = useState(0);
+  const [ok, setOk] = useState(false);
+  const [msg, setMsg] = useState(null);
+  const revisar = e => {
+    e.preventDefault();
+    const r = norm(v); if (!r || ok) return;
+    if (ex.aceptadas.map(norm).includes(r)) { setOk(true); setMsg({ tipo: "ok", titulo: "¡Muy bien!", t: ex.exp }); onAttempt(true); return; }
+    if (ex.pista && r === norm(ex.pista)) { setMsg({ tipo: "bad", titulo: "Esa es la misma palabra", t: "Busca otra que signifique lo mismo." }); return; }
+    const f = fallos + 1; setFallos(f); onAttempt(false);
+    setMsg({ tipo: "bad", titulo: "No está en mi lista", t: (f >= 2 && ex.ayuda ? ex.ayuda + " " : "Prueba ponerla en la oración: ¿se mantiene el sentido? ") + "Si estás seguro de que tu palabra funciona, muéstrasela a un adulto: ¡podría estar bien!" });
+  };
+  return (
+    <ExLayout texto={texto} tp={{ pista: ex.pista }}>
+      <form className="q-card" onSubmit={revisar}>
+        <div className="q-text">{ex.pregunta}</div>
+        <label htmlFor={"in-" + ex.id} className="small muted">Tu sinónimo:</label>
+        <input id={"in-" + ex.id} className="input" value={v} onChange={e => setV(e.target.value)} disabled={ok} autoComplete="off" autoCapitalize="none" spellCheck="false" />
+        {!ok && <div><button className="btn" type="submit">Revisar</button></div>}
+        {msg && <Feedback tipo={msg.tipo} titulo={msg.titulo}>{msg.t}</Feedback>}
+        {ok && <p className="small muted">Otras opciones válidas: {ex.aceptadas.slice(0, 6).join(", ")}.</p>}
+      </form>
+    </ExLayout>
+  );
+}
+
+// =====================================================================
+// MÓDULO 11 · PLAN DE 5 DÍAS
+// =====================================================================
+function Plan({ p, setP, go, param }) {
+  const hoy = hoyISO();
+  useEffect(() => {
+    if (param === null || param === undefined) return;
+    const el = document.getElementById("dia-" + param);
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+  }, [param]);
+  const toggle = id => setP(q => ({ ...q, plan: { ...q.plan, [id]: !q.plan[id] } }));
+  return (
+    <div className="stack" style={{ gap: 18 }}>
+      <div className="page-head">
+        <div className="eyebrow">Módulo 11</div>
+        <h1>Plan de 5 días</h1>
+        <p>Del sábado 26 al miércoles 30 de septiembre. Sesiones de 25 a 30 minutos. Marca cada tarea al terminarla; el botón «Ir» te lleva directo al módulo.</p>
+      </div>
+      {D.plan.map((d, di) => {
+        const reales = d.tareas.filter(t => !t.etapa);
+        const hechas = reales.filter(t => p.plan[t.id]).length;
+        const mins = d.tareas.reduce((a, t) => a + t.min, 0);
+        return (
+          <section key={d.fecha} id={"dia-" + di} className={"dia" + (d.fecha === hoy ? " hoy" : "")} style={{ scrollMarginTop: 80 }}>
+            <div className="dia-head">
+              <div>
+                <div className="eyebrow">Día {di + 1} · {d.dia}{d.fecha === hoy ? " · HOY" : ""}</div>
+                <h3>{d.titulo}</h3>
+              </div>
+              <span className={diaHecho(p, d) ? "pill-ok" : "muted small"}>{diaHecho(p, d) ? "✓ Día completo" : `${hechas}/${reales.length} · ~${mins} min`}</span>
+            </div>
+            {d.nota && <p className="small muted">{d.nota}</p>}
+            {d.tareas.map(t => (
+              <div key={t.id} className={"tarea" + (p.plan[t.id] ? " hecha" : "")}>
+                <input type="checkbox" id={"t-" + t.id} checked={!!p.plan[t.id]} disabled={!!t.etapa} onChange={() => toggle(t.id)} />
+                <label htmlFor={"t-" + t.id}>{t.t}{t.etapa ? <span className="etapa2">Etapa 2</span> : null}</label>
+                <span className="min">{t.min} min</span>
+                <button className="btn sec" style={{ padding: "6px 12px", fontSize: ".9rem" }} onClick={() => go(t.ir[0], t.ir[1])}>Ir</button>
+              </div>
+            ))}
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
+// ---------- Módulos de la etapa 2 (aún no construidos) ----------
+function Proximamente({ id, go }) {
+  const m = MODULOS.find(x => x.id === id) || { n: "Módulo", ico: "🧩", d: "" };
+  return (
+    <div className="stack">
+      <div className="page-head">
+        <div className="eyebrow">Etapa 2</div>
+        <h1>{m.ico} {m.n}</h1>
+        <p>{m.d}</p>
+      </div>
+      <div className="card stack">
+        <h3>Este módulo llega en la Etapa 2</h3>
+        <p className="muted">Mientras tanto, puedes seguir con lo que ya está listo:</p>
+        <div className="row">
+          <button className="btn" onClick={() => go("ejercicios")}>Zona de ejercicios</button>
+          <button className="btn sec" onClick={() => go("lecturas")}>Lecturas modelo</button>
+          <button className="btn sec" onClick={() => go("plan")}>Plan de 5 días</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// =====================================================================
+// APP: navegación, progreso, medallas
+// =====================================================================
+function Nav({ active, go }) {
+  return (
+    <nav aria-label="Módulos">
+      {MODULOS.map(m => (
+        <button key={m.id} className={"nav-item" + (active === m.id ? " on" : "")} onClick={() => go(m.id)}>
+          <span className="ico">{m.ico}</span>{m.n}{m.etapa ? <span className="etq">Pronto</span> : null}
+        </button>
+      ))}
+    </nav>
+  );
+}
+
+function App() {
+  const [p, setP] = useState(cargar);
+  useEffect(() => guardar(p), [p]);
+  const [route, setRoute] = useState({ view: "inicio", param: null });
+  const [menu, setMenu] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [toast, setToast] = useState(null);
+  const [filtro, setFiltro] = useState(FILTRO0);
+  const ahora = useAhora(60000);
+  const f = faltan(ahora);
+
+  const go = (view, param = null) => {
+    if (view === "ejercicios" && param && typeof param === "object") { setFiltro({ ...FILTRO0, ...param }); param = null; }
+    setRoute({ view, param }); setMenu(false);
+    window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
+    const nuevas = MEDALLAS.filter(m => !p.medallas.includes(m.id) && m.test(p));
+    if (nuevas.length) {
+      setP(q => ({ ...q, medallas: [...q.medallas, ...nuevas.map(m => m.id).filter(id => !q.medallas.includes(id))] }));
+      setToast(nuevas[0]);
+    }
+  }, [p]);
+  useEffect(() => { if (!toast) return; const t = setTimeout(() => setToast(null), 4000); return () => clearTimeout(t); }, [toast]);
+
+  const registrar = (ex, correcto, primerIntento) => setP(q => {
+    const n = { ...q, ex: { ...q.ex }, fails: { ...q.fails } };
+    const prev = q.ex[ex.id] || {};
+    const first = prev.first !== undefined ? prev.first : (correcto && primerIntento);
+    const k = ex.habilidad;
+    if (correcto) {
+      n.ex[ex.id] = { done: true, first };
+      if (primerIntento) { n.streak = q.streak + 1; n.best = Math.max(q.best, n.streak); if (k) n.fails[k] = 0; }
+    } else {
+      n.ex[ex.id] = { ...prev, done: !!prev.done, first };
+      if (primerIntento) n.streak = 0;
+      if (k) n.fails[k] = (q.fails[k] || 0) + 1;
+    }
+    return n;
+  });
+  const limpiarFallos = k => setP(q => ({ ...q, fails: { ...q.fails, [k]: 0 } }));
+  const reiniciar = () => { setP(nuevo()); setFiltro(FILTRO0); setConfirmReset(false); go("inicio"); };
+
+  const { view, param } = route;
+  const props = { p, setP, go };
+  let vista;
+  switch (view) {
+    case "inicio": vista = <Inicio {...props} />; break;
+    case "aprende": vista = <Aprende {...props} />; break;
+    case "ficha": vista = <Ficha key={param} k={param} {...props} />; break;
+    case "lecturas": vista = <Lecturas {...props} />; break;
+    case "lectura": vista = <Lectura key={param} id={param} {...props} />; break;
+    case "claves10": vista = <Claves10 {...props} />; break;
+    case "ejercicios": vista = <Ejercicios {...props} filtro={filtro} setFiltro={setFiltro} />; break;
+    case "ex": vista = <Player key={param} ex={EXMAP[param]} {...props} filtro={filtro} registrar={registrar} limpiarFallos={limpiarFallos} />; break;
+    case "plan": vista = <Plan {...props} param={param} />; break;
+    default: vista = <Proximamente id={view} {...props} />;
+  }
+  const active = PADRE[view] || view;
+  const pie = (
+    <div className="side-foot">
+      <div className="small muted">Tu progreso se guarda en este navegador.</div>
+      <button className="btn sec" onClick={() => { setMenu(false); setConfirmReset(true); }}>↺ Reiniciar progreso</button>
+    </div>
+  );
+
+  return (
+    <>
+      <header className="topbar">
+        <button className="btn-menu" onClick={() => setMenu(true)} aria-label="Abrir menú">☰ Menú</button>
+        <button className="logo" onClick={() => go("inicio")}><span className="logo-mark">📖</span><span>Misión Lectora</span></button>
+        <div className="top-spacer" />
+        <span className="chip sun" title="Respuestas correctas seguidas a la primera">🔥 {p.streak}</span>
+        {f && <span className="chip hide-sm">Faltan {f.d > 0 ? f.d + (f.d === 1 ? " día" : " días") : f.h + " h"}</span>}
+      </header>
+      <div className="layout">
+        <aside className="side"><Nav active={active} go={go} />{pie}</aside>
+        <main className="main">{vista}</main>
+      </div>
+      {menu && <>
+        <div className="drawer-bg" onClick={() => setMenu(false)} />
+        <aside className="drawer"><Nav active={active} go={go} />{pie}</aside>
+      </>}
+      {confirmReset && (
+        <div className="modal-bg" onClick={() => setConfirmReset(false)}>
+          <div className="modal" role="dialog" aria-modal="true" onClick={e => e.stopPropagation()}>
+            <h2>¿Reiniciar todo?</h2>
+            <p className="muted">Se borrarán tus ejercicios, medallas, racha y el plan marcado. No se puede deshacer.</p>
+            <div className="row" style={{ justifyContent: "flex-end" }}>
+              <button className="btn sec" onClick={() => setConfirmReset(false)}>Cancelar</button>
+              <button className="btn" style={{ background: "var(--bad)", color: "#fff" }} onClick={reiniciar}>Sí, reiniciar</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {toast && <div className="toast" role="status"><span className="t-ico">{toast.ico}</span><div><b>¡Nueva medalla!</b><div>{toast.n}</div></div></div>}
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
